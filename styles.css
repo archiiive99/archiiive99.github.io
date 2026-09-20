@@ -147,9 +147,10 @@ h1 span { display: inline-block; font-size: 18px; color: var(--muted); font-weig
 .awards li { display: grid; grid-template-columns: 38px minmax(0,1fr); gap: 16px; }
 .awards strong { font-size: 16px; line-height: 1.55; display: block; }
 .awards p { font-size: 15px; margin-top: 6px; line-height: 1.75; }
-footer { max-width: 1040px; margin: auto; padding: 28px 0 40px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 24px; font-size: 14px; }
-footer div { display: flex; gap: 24px; }
-footer > a { color: var(--muted); }
+footer { max-width: 1040px; margin: auto; padding: 0 0 40px; display: flex; justify-content: center; align-items: center; }
+.back-to-top { width: 48px; height: 48px; min-height: 48px; padding: 0; border-radius: 50%; display: grid; place-items: center; color: var(--fg); text-decoration: none; }
+.back-to-top:hover { text-decoration: none; }
+.back-to-top .lucide { width: 20px; height: 20px; }
 @media (max-width: 1100px) {
   .intro { column-gap: 40px; }
   h1 { font-size: 42px; }
@@ -200,7 +201,6 @@ footer > a { color: var(--muted); }
   .background-grid { grid-template-columns: 1fr; }
   .project-meta { flex-wrap: wrap; }
   .industry-project { padding-left: 18px; }
-  footer div { display: grid; gap: 5px; }
   #research,#projects,#experience,#background { padding-top: 44px; }
 }
 @media (max-width: 380px) { .intro h1 { font-size: 28px; } }
