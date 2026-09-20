@@ -61,8 +61,8 @@ main { max-width: 1120px; padding: 0 40px 72px; margin: auto; }
 /* Full-width reading bands, not floating cards. Shadows extend only the fill. */
 main > section { position: relative; isolation: isolate; }
 .intro { display: grid; grid-template-columns: 240px minmax(0,1fr); gap: 24px 64px; align-items: start; padding: 64px 0 56px; }
-.portrait-slot { grid-column: 1; grid-row: 1 / span 2; width: 100%; aspect-ratio: 3 / 4; background: var(--track); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
-.portrait-slot img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.portrait-slot { position: relative; grid-column: 1; grid-row: 1 / span 2; align-self: stretch; min-height: 0; width: 100%; background: var(--track); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.portrait-slot img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
 .identity { grid-column: 2; }
 .intro-story { grid-column: 2; max-width: 680px; }
 .eyebrow { display: block; color: var(--muted); font-size: 14px; font-weight: 500; margin-bottom: 12px; }

@@ -45,6 +45,8 @@ Limit rendering to 30 fps and at most 1280 by 900 pixels; stop animation in hidd
 Static monochrome film grain is generated once as a small bitmap tile. It sits above the silk background but below all text, controls and publication images. No sepia tint, animated grain or per-frame texture generation. Increased contrast hides grain as well.
 # Section Simplification (2026-09-21)
 
+- Biography is one continuous paragraph. Portrait height stretches across the identity and biography grid rows on desktop, adapting automatically to content length. On mobile it stretches beside the identity while the paragraph spans the full width below. This supersedes the fixed 3:4 portrait ratio.
+
 - Soften thin wave boundaries using continuous intensity slopes plus a 10px blur on the background canvas only; slight overscan avoids transparent blurred edges. Text and controls remain sharp.
 - Each project has a concise contribution sentence, verified against Notion detail pages where available, rather than a generic topic list.
 
