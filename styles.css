@@ -70,6 +70,7 @@ h1 { font-size: 48px; font-weight: 600; }
 h1 span { display: inline-block; font-size: 18px; color: var(--muted); font-weight: 400; margin-left: 10px; }
 .affiliation { font-size: 16px; margin-top: 16px; line-height: 1.75; }
 .bio { font-size: 18px; line-height: 1.85; }
+.bio + .bio { margin-top: 16px; }
 .bio.secondary { font-size: 16px; margin-top: 18px; line-height: 1.75; }
 .contact-links { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 24px; }
 .button { display: inline-flex; gap: 8px; align-items: center; justify-content: center; min-height: 44px; padding: 8px 17px; border-radius: 999px; color: var(--fg); font-size: 14px; font-weight: 500; }

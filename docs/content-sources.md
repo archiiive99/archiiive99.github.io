@@ -11,6 +11,8 @@
 
 ## Owner updates, authoritative over old portfolio
 
+- Owner confirmed current Ph.D. student status and requested completed B.S./M.S. in the introduction. Use Dongguk Computer Engineering and Hanyang Automotive Engineering from existing records. Doctoral institution, major and start date await confirmation; do not infer them from lab affiliation. Email confirmed as archiiive99@gmail.com.
+
 - Current research interests: End-to-End Autonomous Driving, Closed-loop Evaluation, 3D Gaussian Splatting, and Pretraining. This supersedes the old Notion-derived interest summary; historical project descriptions remain factual to those projects.
 
 - PAVER is Under Review. Do not claim acceptance or a specific reviewing venue.
@@ -29,7 +31,7 @@
 ## Unresolved details
 
 - Notion embedded CV says Dongguk graduation February 2024; prose and lab profile say August 2024. Use August, matching lab profile and prose.
-- Master's graduation was expected August 2026 in Notion. No completion confirmed. Use 'M.S. studies' and 'From Sep 2024'; do not assert awarded degree or current student status.
+- Master's completion is now reflected per owner's latest B.S./M.S./current Ph.D. instruction; exact graduation month is not newly confirmed.
 - Dongguk internship end varies between December 2023, January 2024, February 2024. Show broad 2023–2024 pending confirmation.
 - Notion SGLDet Under Review is stale: official ICLR 2026 proceedings supersedes it.
 - Earlier DOM-only inspection showed 'No results'. Reinspection of public queryCollection responses on 2026-09-21 recovered 5 graduate and 5 undergraduate projects, with hasMore=false, plus 3 certifications. The response uses recordMap v3 with nested value.value records. These 10 projects are now included alongside the owner's new RideFlux project. Exclude stale template fields (Fresh, Art_Directing, project.url, unrelated design award); use actual titles, dates and research topics. Raw responses and personal contact information are not committed.
