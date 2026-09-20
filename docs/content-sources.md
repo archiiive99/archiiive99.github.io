@@ -37,6 +37,21 @@
 
 ## Asset attribution
 
+## Project Contribution Verification (2026-09-21)
+
+Public Notion detail pages verified for one-sentence contribution descriptions:
+
+- Virtual Docent: `2a6332bb4dff810c86a7d23d47973a3c`, concept through React/Django/AWS delivery, LLM/TTS/face animation.
+- SteadyLab: `2a6332bb4dff815aaa37d0ee506f6999`, team leadership, GPS-free visual localization and stereo perception.
+- Multi-organ segmentation: `2a6332bb4dff818087c5d8f6b36e57ca`, distance-aware label smoothing and diffusion training infrastructure.
+- Medical classification: `2a6332bb4dff818d9b2ede80536afb04`, augmentation, multi-GPU implementation and Grad-CAM analysis.
+- MACARON: `2a6332bb4dff817e8215e543a11e7b7f`, camera/LiDAR missions, lane detection and vehicle communication.
+- Hyundai motion prediction: `2a4332bb4dff8079a6c4d616b568d57d`, VAD motion prediction and OpenScene data integration. Do not portray planned ego-compensation experiments as completed work.
+- NAVSIM: `2a4332bb4dff81f687c7e8026db00d42`, leading pseudo-LiDAR pipelines, BEV planning and reward experiments. Avoid inconsistent numerical results in the source.
+- SL: `2a4332bb4dff8074a940ed3da588f18d`, TensorRT/C++ detection, tracking and risk assessment; no restricted visual assets republished.
+- Waymo and AI-accelerator detail requests returned HTTP 429/challenge; descriptions remain conservative summaries of previously retrieved collection metadata and the official Waymo report. No claim to have read those two detail pages.
+- RideFlux pretraining role comes directly from owner, not Notion.
+
 - `assets/paver-demo.webp`: https://github.com/archiiive99/PAVER/blob/main/assets/vad_tiny_gradcam_demo.webp ; original 40,284,438-byte file, 1200x506, WebP ANIM loop count 0 (infinite). Replaces the static PAVER overview thumbnail; lazily loaded.
 
 - Compact publication thumbnails are first-page renders of actual papers, not generated illustrations: Waymo official Swin-Trajectory report; arXiv 2408.00347 (BMVC); YMJ DOI 10.3349/ymj.2023.0091; ICAIIC official program PDFs 1571107040 (occupancy) and 1571107345 (mapping) from manuscriptlink/di0zxmb8pwajl.cloudfront.net.

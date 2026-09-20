@@ -45,6 +45,9 @@ Limit rendering to 30 fps and at most 1280 by 900 pixels; stop animation in hidd
 Static monochrome film grain is generated once as a small bitmap tile. It sits above the silk background but below all text, controls and publication images. No sepia tint, animated grain or per-frame texture generation. Increased contrast hides grain as well.
 # Section Simplification (2026-09-21)
 
+- Soften thin wave boundaries using continuous intensity slopes plus a 10px blur on the background canvas only; slight overscan avoids transparent blurred edges. Text and controls remain sharp.
+- Each project has a concise contribution sentence, verified against Notion detail pages where available, rather than a generic topic list.
+
 - Header refinement: 52px desktop inner height, 4px vertical padding, 20px name and 16px navigation; remove the decorative name dot. Keep 44px control targets and centered navigation. Mobile uses 2px between its two header rows.
 - Narrower background waves: increased phase frequency and reduced crest width; preserve autonomous motion and cursor deformation.
 - PAVER featured thumbnail uses the repository's original looping animated WebP, without quality reduction.

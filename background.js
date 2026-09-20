@@ -56,13 +56,14 @@
       float phase=flow.y*6.2+flow.x*.85
         +1.1*sin(flow.x*1.5+t*.55)-t*1.5;
       float wave=.5+.5*sin(phase);
-      float crest=smoothstep(.70,.99,wave);
-      float fold=.5+.5*sin(phase+.65+.3*sin(flow.y-t*.4));
-      float curtains=crest*.93+fold*.07;
+      // Continuous slopes avoid the flat light/dark stripes of clipped crests.
+      float crest=pow(wave,1.8);
+      float fold=.5+.5*sin(phase*.53+.65+.3*sin(flow.y-t*.4));
+      float curtains=crest*.70+fold*.30;
       float edge=smoothstep(.08,.55,abs(vUv.x-.5));
       float strength=mix(.64,1.,edge);
-      float lightShade=.965-curtains*.22*strength;
-      float darkShade=.055+curtains*.27*strength;
+      float lightShade=.955-curtains*.18*strength;
+      float darkShade=.075+curtains*.23*strength;
       gl_FragColor=vec4(vec3(mix(lightShade,darkShade,dark)),1.);
     }`;
   const shaders = [];
