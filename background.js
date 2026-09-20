@@ -1,7 +1,4 @@
-/* Silk flow adapted for this website from React Bits by David Haz.
- * Source: https://github.com/DavidHDev/react-bits/tree/main/src/content/Backgrounds/Silk
- * License: assets/REACT-BITS-LICENSE. No React runtime needed for this 2D pass.
- */
+/* Monochrome aurora curtains; retain the lightweight background runtime. */
 (() => {
   // Static film grain: generated once, below text and figures, never flickering.
   const grain=document.createElement('canvas');
@@ -42,17 +39,25 @@
     void main(){
       vec2 uv=vUv;
       uv.x=(uv.x-.5)*min(aspect,1.8)+.5;
-      vec2 tex=uv*1.15;
-      float tOffset=time*.65;
-      tex.y+=.03*sin(8.*tex.x-tOffset);
-      float pattern=.6+.4*sin(5.*(tex.x+tex.y+
-        cos(3.*tex.x+5.*tex.y)+.02*tOffset)+
-        sin(20.*(tex.x+tex.y-.1*tOffset)));
-      float fold=smoothstep(.15,1.,pattern);
-      float edge=smoothstep(.15,.5,abs(vUv.x-.5));
-      float strength=mix(.25,1.,edge);
-      float lightShade=.953+(fold-.5)*.16*strength;
-      float darkShade=.086+(fold-.5)*.12*strength;
+      float t=time*.085;
+      float curtains=0.;
+      for(int i=0;i<3;i++){
+        float layer=float(i);
+        float x=uv.x+layer*.37;
+        float center=.23+layer*.24
+          +.13*sin(x*3.4+t+layer)
+          +.045*sin(x*7.1-t*.7+layer*1.8);
+        float distance=uv.y-center;
+        float width=.055+.025*sin(x*2.8+t*.5+layer);
+        float ribbon=exp(-distance*distance/(width*width));
+        float veil=exp(-distance*distance/.045);
+        float pleats=.84+.16*sin(x*29.+sin(x*6.-t)*2.5+t);
+        curtains+=(ribbon*.7+veil*.3)*pleats;
+      }
+      float edge=smoothstep(.08,.55,abs(vUv.x-.5));
+      float strength=mix(.48,1.,edge);
+      float lightShade=.955-curtains*.12*strength;
+      float darkShade=.075+curtains*.15*strength;
       gl_FragColor=vec4(vec3(mix(lightShade,darkShade,dark)),1.);
     }`;
   const shaders = [];

@@ -45,6 +45,8 @@ Limit rendering to 30 fps and at most 1280 by 900 pixels; stop animation in hidd
 Static monochrome film grain is generated once as a small bitmap tile. It sits above the silk background but below all text, controls and publication images. No sepia tint, animated grain or per-frame texture generation. Increased contrast hides grain as well.
 # Section Simplification (2026-09-21)
 
+- Background now uses three broad, slowly undulating monochrome aurora curtains instead of the earlier Silk folds. No green/purple aurora colors. Preserve static grain, motion preference persistence, reduced-motion behavior and the bounded 30 fps renderer.
+
 - Use Publications as both the section heading and navigation label, without a duplicate eyebrow.
 - Projects has no collaboration/type eyebrow or separate Project type / My focus fields; describe the work directly.
 - Remove full-width translucent section backgrounds. The animated page background must remain continuous through Education, Awards and the footer.
