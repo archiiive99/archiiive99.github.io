@@ -139,6 +139,8 @@ h1 span { display: inline-block; font-size: 18px; color: var(--muted); font-weig
 .organization { font-size: 16px; margin: 8px 0; color: var(--fg); }
 .timeline article p:not(.organization) { font-size: 16px; line-height: 1.75; max-width: 65ch; }
 .background-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 72px; }
+#background { margin-top: 64px; padding-bottom: 48px; border-block: 1px solid var(--line); }
+#certifications { padding-top: 48px; }
 .background-grid h2 { font-size: 23px; margin-bottom: 26px; }
 .education { margin-bottom: 26px; }
 .education h3 { font-size: 18px; margin-top: 10px; margin-bottom: 6px; }
@@ -203,6 +205,8 @@ footer { max-width: 1040px; margin: auto; padding: 0 0 40px; display: flex; just
   .project-meta { flex-wrap: wrap; }
   .industry-project { padding-left: 18px; }
   #research,#projects,#experience,#background { padding-top: 44px; }
+  #background { margin-top: 44px; padding-bottom: 36px; }
+  #certifications { padding-top: 36px; }
 }
 @media (max-width: 380px) { .intro h1 { font-size: 28px; } }
 @media (prefers-reduced-motion: reduce) {
