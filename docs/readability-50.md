@@ -53,6 +53,7 @@ Reading surfaces use full-width neutral translucent bands, not nested or floatin
 47. [x] 키보드 탐색 검증
 48. [x] 모션 감소·고대비 검증
 49. [x] 사진 3:4 비율·필터 회귀 검증
+50. [x] 배포본·커밋 상태 확인
 
 ## Verification
 
@@ -64,4 +65,4 @@ Reading surfaces use full-width neutral translucent bands, not nested or floatin
 - Reduced motion and high contrast checked. Playback pause/persistence and theme persistence passed.
 - Publication filters: 2026 = 3, earlier = 5, all = 8.
 - Safari and physical iPhone testing remain outside this verification.
-50. [ ] 배포본·커밋 상태 확인
+- Deployment: Pages run `35529382506` succeeded for `5a0929d`; live `styles.css?v=8` is byte-identical to the local stylesheet. Public-page viewport, image, anchor and filter checks passed.
