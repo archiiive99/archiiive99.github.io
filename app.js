@@ -10,7 +10,14 @@ const publications = [
 ];
 // All content is maintained locally, not supplied by runtime HTML or a remote API.
 const escapeHTML = value => value.replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-document.querySelector('#publications').innerHTML = publications.map(p => `<article class="publication ${p.image?'featured':''}" data-year="${p.year}">${p.image?`<a class="pub-visual" href="${p.links.find(([name])=>name==='Project')[1]}" aria-label="${escapeHTML(p.title)} project"><img src="${p.image}" alt="${escapeHTML(p.alt)}" loading="lazy" width="960" height="350"></a>`:''}<div class="pub-body"><div class="pub-meta"><span class="venue ${p.type||''}">${escapeHTML(p.venue)}</span><span>${p.year}</span></div><h3>${escapeHTML(p.title)}</h3><p class="authors">${escapeHTML(p.authors).replaceAll('Jaeha Song','<strong>Jaeha Song</strong>')}</p>${p.description?`<p class="pub-description">${escapeHTML(p.description)}</p>`:''}<div class="pub-links">${p.links.map(([name,url])=>`<a href="${url}">${name} ↗</a>`).join('')}</div></div></article>`).join('');
+const icon = name => `<i data-lucide="${name}" aria-hidden="true"></i>`;
+function venueBadge(p) {
+  const label=p.venue.replace(/ 20\d{2}/,'');
+  const family=p.type==='review'?'review':p.venue.startsWith('ICLR')?'iclr':p.venue.startsWith('ICPR')?'icpr':'academic';
+  return `<span class="venue venue-${family}"><span class="venue-label">${p.type==='review'?icon('clock-3'):icon('book-open')}${escapeHTML(label)}</span><span class="venue-year">${p.year}</span></span>`;
+}
+document.querySelector('#publications').innerHTML = publications.map(p => `<article class="publication ${p.image?'featured':''}" data-year="${p.year}">${p.image?`<a class="pub-visual" href="${p.links.find(([name])=>name==='Project')[1]}" aria-label="${escapeHTML(p.title)} project"><img src="${p.image}" alt="${escapeHTML(p.alt)}" loading="lazy" width="960" height="350"><span class="figure-link">${icon('arrow-up-right')}</span></a>`:''}<div class="pub-body"><div class="pub-meta">${venueBadge(p)}</div><h3>${escapeHTML(p.title)}</h3><p class="authors">${escapeHTML(p.authors).replaceAll('Jaeha Song','<strong>Jaeha Song</strong>')}</p>${p.description?`<p class="pub-description">${escapeHTML(p.description)}</p>`:''}<div class="pub-links">${p.links.map(([name,url])=>`<a href="${url}">${icon(name==='Code'?'github':name==='Paper'?'file-text':'arrow-up-right')}${name}</a>`).join('')}</div></div></article>`).join('');
+lucide.createIcons({attrs:{'stroke-width':1.6}});
 for(const button of document.querySelectorAll('[data-filter]')) button.addEventListener('click',()=>{
   document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
   document.querySelectorAll('.publication').forEach(row=>row.hidden=button.dataset.filter==='2026'?row.dataset.year!=='2026':button.dataset.filter==='earlier'?row.dataset.year==='2026':false);
@@ -18,7 +25,7 @@ for(const button of document.querySelectorAll('[data-filter]')) button.addEventL
 function setTheme(theme){
   document.documentElement.dataset.theme=theme;
   document.querySelectorAll('[data-theme-choice]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeChoice===theme)));
-  document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#141414':'#fafafa';
+  document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#161616':'#f3f3f3';
 }
 setTheme(document.documentElement.dataset.theme);
 for(const button of document.querySelectorAll('[data-theme-choice]'))button.addEventListener('click',()=>{setTheme(button.dataset.themeChoice);try{localStorage.setItem('jaeha.theme',button.dataset.themeChoice)}catch{}});

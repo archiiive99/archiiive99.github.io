@@ -32,6 +32,8 @@
 
 ## Asset attribution
 
+- `assets/lucide.min.js`: Lucide 0.468.0, locally hosted; see `assets/LUCIDE-LICENSE`.
+
 - `assets/paver.png`: owner's PAVER `assets/fig/overview5.png`.
 - `assets/sgldet.png`: SGLDet `assets/overview.png`, Apache-2.0 repository, linked to original project. See `assets/SGLDet-LICENSE`.
 - Glass control inspiration: PAVER `styles.css`, restrained translucent surface, specular inset border, saturated backdrop, pill controls. Layout is original to this profile, not a reproduction of PAVER's project layout.
