@@ -53,7 +53,7 @@ Root causes: theme targets were 36 x 40px; the generic `.button` padding overrod
 97. [x] 테마·필터 전환 치수 검사
 98. [x] 키보드·저장 복원 회귀
 99. [x] 라이트·다크 스크롤 캡처
-100. [ ] 배포·체크리스트 기록
+100. [x] 배포·체크리스트 기록
 
 ## Evidence
 
@@ -66,3 +66,4 @@ Root causes: theme targets were 36 x 40px; the generic `.button` padding overrod
 - Empty 3:4 portrait and grayscale materials retained. No domestic papers reintroduced.
 - News copy now explicitly says RSD-BEV was accepted to ICPR 2026; August remains the existing news-entry date, not a verified acceptance-notification date.
 - Safari/iPhone hardware verification is not claimed.
+- Live verification: Pages run `35531478424` succeeded for `dd649be`; the header geometry, keyboard, persisted filter, invalid-value fallback and scroll-state suite also passed against https://archiiive99.github.io/.
