@@ -108,6 +108,7 @@ h1 span { display: inline-block; font-size: 18px; color: var(--muted); font-weig
 .featured h3 { font-size: 21px; }
 .authors { font-size: 15px; color: var(--secondary); margin-top: 14px; line-height: 1.75; max-width: 78ch; }
 .authors strong { color: var(--fg); font-weight: 650; }
+.author-name { display: inline-block; white-space: nowrap; }
 .pub-description { font-size: 16px; line-height: 1.75; margin-top: 12px; max-width: 68ch; }
 .pub-links { display: flex; gap: 10px; flex-wrap: wrap; padding-top: 22px; }
 .featured .pub-links { margin-top: auto; }

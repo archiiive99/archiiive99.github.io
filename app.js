@@ -11,12 +11,13 @@ const publications = [
 // All content is maintained locally, not supplied by runtime HTML or a remote API.
 const escapeHTML = value => value.replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const icon = name => `<i data-lucide="${name}" aria-hidden="true"></i>`;
+const renderAuthors = authors => authors.split(', ').map(name => `<span class="author-name">${name === 'Jaeha Song' ? `<strong>${escapeHTML(name)}</strong>` : escapeHTML(name)}</span>`).join(', ');
 function venueBadge(p) {
   const label=p.type==='review'||/20\d{2}/.test(p.venue)?p.venue:`${p.venue} ${p.year}`;
   const family=p.type==='review'?'review':p.venue.startsWith('ICLR')?'iclr':p.venue.startsWith('ICPR')?'icpr':'academic';
   return `<span class="venue venue-${family}">${escapeHTML(label)}</span>`;
 }
-document.querySelector('#publications').innerHTML = publications.map(p => `<article class="publication ${p.image?'featured':''}" data-year="${p.year}">${p.image?`<a class="pub-visual" href="${p.links.find(([name])=>name==='Project')[1]}" aria-label="${escapeHTML(p.title)} project"><img src="${p.image}" alt="${escapeHTML(p.alt)}" loading="lazy" width="960" height="350"><span class="figure-link">${icon('arrow-up-right')}</span></a>`:''}<div class="pub-body"><div class="pub-meta">${venueBadge(p)}</div><h3>${escapeHTML(p.title)}</h3><p class="authors">${escapeHTML(p.authors).replaceAll('Jaeha Song','<strong>Jaeha Song</strong>')}</p>${p.description?`<p class="pub-description">${escapeHTML(p.description)}</p>`:''}<div class="pub-links">${p.links.map(([name,url])=>`<a href="${url}">${icon(name==='Code'?'github':name==='Paper'?'file-text':'arrow-up-right')}${name}</a>`).join('')}</div></div></article>`).join('');
+document.querySelector('#publications').innerHTML = publications.map(p => `<article class="publication ${p.image?'featured':''}" data-year="${p.year}">${p.image?`<a class="pub-visual" href="${p.links.find(([name])=>name==='Project')[1]}" aria-label="${escapeHTML(p.title)} project"><img src="${p.image}" alt="${escapeHTML(p.alt)}" loading="lazy" width="960" height="350"><span class="figure-link">${icon('arrow-up-right')}</span></a>`:''}<div class="pub-body"><div class="pub-meta">${venueBadge(p)}</div><h3>${escapeHTML(p.title)}</h3><p class="authors">${renderAuthors(p.authors)}</p>${p.description?`<p class="pub-description">${escapeHTML(p.description)}</p>`:''}<div class="pub-links">${p.links.map(([name,url])=>`<a href="${url}">${icon(name==='Code'?'github':name==='Paper'?'file-text':'arrow-up-right')}${name}</a>`).join('')}</div></div></article>`).join('');
 lucide.createIcons({attrs:{'stroke-width':1.6}});
 function setPublicationFilter(value){
   const filter=['all','2026','earlier'].includes(value)?value:'all';
