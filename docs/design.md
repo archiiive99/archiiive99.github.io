@@ -27,6 +27,8 @@ Selected segmented controls share a moving lens with a short spring-like cubic-b
 
 ## Maintenance
 
+Readability floor: description/body 16px, authors 15px, dates/secondary labels 14px (venue metadata 13px). Do not shrink these on mobile to make layouts fit; reflow the layout instead. Neutral translucent full-width reading bands reduce background interference without turning sections into floating cards. See `readability-50.md` for the implementation and verification checklist.
+
 - Test theme persistence, all publication filters, narrow viewports, and project/experience separation.
 - Keep controls' dimensions stable between active and inactive states.
 - Confirm both light and dark styles using screenshots, including navigation over scrolled content.
