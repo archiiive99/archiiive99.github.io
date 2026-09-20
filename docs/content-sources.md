@@ -11,6 +11,8 @@
 
 ## Owner updates, authoritative over old portfolio
 
+- Master's graduation confirmed August 2026. Education lists Sep 2024-Aug 2026 and Ph.D. studies Sep 2026-Present. Doctoral school/program still require confirmation.
+
 - RideFlux internship team: VVSW & Perception Unit; work covered ML-based Planning, Scenario Tagging, and MLOps, supplied by owner.
 
 - Doctoral studies began September 2026, confirmed by owner. Integrate the existing Soonmin Hwang research/advisor sentence into the opening biography rather than a separate secondary paragraph. Doctoral institution and degree-program name remain unconfirmed.
