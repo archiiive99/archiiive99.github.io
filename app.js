@@ -58,7 +58,7 @@ function createLens(group,selector){
   return position;
 }
 document.querySelectorAll('.segmented').forEach(group=>{
-  const position=createLens(group,'[aria-pressed="true"]');
+  const position=group.matches('.theme-control')?()=>{}:createLens(group,'[aria-pressed="true"]');
   group.addEventListener('click',position);
   group.addEventListener('keydown',event=>{
     const buttons=[...group.querySelectorAll('button:not(:disabled)')];
@@ -75,16 +75,12 @@ document.querySelectorAll('.segmented').forEach(group=>{
 });
 
 const navigation=[...document.querySelectorAll('nav a')];
-const nav=document.querySelector('nav');
-const positionNavigation=createLens(nav,'[aria-current]');
 const header=document.querySelector('.site-header');
 let headerOffset=112;
 const updateNavigation=()=>{
   const atBottom=scrollY>0&&scrollY+innerHeight>=document.documentElement.scrollHeight-2;
   const active=atBottom?navigation.at(-1):[...navigation].reverse().find(a=>document.querySelector(a.hash).getBoundingClientRect().top<=headerOffset+8);
   navigation.forEach(a=>{if(a===active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')});
-  nav.classList.toggle('has-current',!!active);
-  positionNavigation();
 };
 let scrollFrame=0;
 addEventListener('scroll',()=>{

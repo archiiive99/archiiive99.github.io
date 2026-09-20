@@ -8,7 +8,7 @@ if (/Chrome\//.test(navigator.userAgent) && CSS.supports('backdrop-filter', 'url
   const defs = document.createElementNS(ns, 'defs');
   svg.append(defs);
   document.body.append(svg);
-  const controls=document.querySelectorAll('nav, .contact-links .button, .pub-links a, .appearance-controls, .wordmark');
+  const controls=document.querySelectorAll('.contact-links .button, .pub-links a');
   const maps=new Map();
   controls.forEach((control,index)=>{
   const filter = document.createElementNS(ns, 'filter');
