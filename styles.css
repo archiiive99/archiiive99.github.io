@@ -61,7 +61,6 @@ nav a[aria-current]::after { transform: scaleX(1); }
 main { max-width: 1120px; padding: 0 40px 72px; margin: auto; }
 /* Full-width reading bands, not floating cards. Shadows extend only the fill. */
 main > section { position: relative; isolation: isolate; }
-main > section::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--reading-surface); box-shadow: 0 0 0 100vmax var(--reading-surface); clip-path: inset(0 -100vmax); }
 .intro { display: grid; grid-template-columns: 240px minmax(0,1fr); gap: 24px 64px; align-items: start; padding: 64px 0 56px; }
 .portrait-slot { grid-column: 1; grid-row: 1 / span 2; width: 100%; aspect-ratio: 3 / 4; background: var(--track); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
 .portrait-slot img { display: block; width: 100%; height: 100%; object-fit: cover; }

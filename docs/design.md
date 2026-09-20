@@ -43,3 +43,9 @@ Owner requested a flowing water/flame-like background. `background.js` adapts th
 Limit rendering to 30 fps and at most 1280 by 900 pixels; stop animation in hidden tabs. The pause/play control persists its preference. Reduced-motion renders a still image; increased-contrast hides the canvas. Unsupported WebGL or a lost context falls back to the original flat background without breaking the page.
 
 Static monochrome film grain is generated once as a small bitmap tile. It sits above the silk background but below all text, controls and publication images. No sepia tint, animated grain or per-frame texture generation. Increased contrast hides grain as well.
+# Section Simplification (2026-09-21)
+
+- Use Publications as both the section heading and navigation label, without a duplicate eyebrow.
+- Projects has no collaboration/type eyebrow or separate Project type / My focus fields; describe the work directly.
+- Remove full-width translucent section backgrounds. The animated page background must remain continuous through Education, Awards and the footer.
+- Additional project records and compact right-side publication thumbnails remain pending source verification; do not invent missing content.
