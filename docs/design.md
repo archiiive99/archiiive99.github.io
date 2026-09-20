@@ -31,3 +31,9 @@ Selected segmented controls share a moving lens with a short spring-like cubic-b
 - Keep controls' dimensions stable between active and inactive states.
 - Confirm both light and dark styles using screenshots, including navigation over scrolled content.
 - Never introduce fake publication thumbnails or turn sections into nested cards.
+
+## Ambient motion
+
+Owner requested a flowing water/flame-like background. `background.js` adapts the React Bits Silk pattern to a single 2D WebGL pass in neutral grayscale, with weaker contrast behind the central reading area. There is no React or 3D runtime dependency. Source attribution and the upstream license are included in `assets/REACT-BITS-LICENSE`.
+
+Limit rendering to 30 fps and at most 1280 by 900 pixels; stop animation in hidden tabs. The pause/play control persists its preference. Reduced-motion renders a still image; increased-contrast hides the canvas. Unsupported WebGL or a lost context falls back to the original flat background without breaking the page.

@@ -17,14 +17,16 @@
   <script src="assets/lucide.min.js" defer></script>
   <script src="app.js" defer></script>
   <script src="optics.js" defer></script>
+  <script src="background.js" defer></script>
 </head>
 <body>
+<canvas id="silk-background" aria-hidden="true"></canvas>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="nav-inner">
     <a class="wordmark" href="#about" aria-label="Jaeha Song, home">Jaeha Song<span class="brand-dot"></span></a>
     <nav aria-label="Main navigation"><a href="#research">Research</a><a href="#projects">Projects</a><a href="#experience">Experience</a></nav>
-    <div class="segmented theme-control" role="group" aria-label="Color theme"><button type="button" data-theme-choice="light" aria-pressed="true" aria-label="Light theme" title="Light theme"><i data-lucide="sun" aria-hidden="true"></i></button><button type="button" data-theme-choice="dark" aria-pressed="false" aria-label="Dark theme" title="Dark theme"><i data-lucide="moon" aria-hidden="true"></i></button></div>
+    <div class="appearance-controls"><div class="segmented theme-control" role="group" aria-label="Color theme"><button type="button" data-theme-choice="light" aria-pressed="true" aria-label="Light theme" title="Light theme"><i data-lucide="sun" aria-hidden="true"></i></button><button type="button" data-theme-choice="dark" aria-pressed="false" aria-label="Dark theme" title="Dark theme"><i data-lucide="moon" aria-hidden="true"></i></button></div><button type="button" class="button motion-control" id="background-motion" aria-label="Pause background animation" title="Pause background animation" aria-pressed="true"><i data-lucide="pause" aria-hidden="true"></i></button></div>
   </div>
 </header>
 <main id="main">

@@ -1,0 +1,117 @@
+/* Silk flow adapted for this website from React Bits by David Haz.
+ * Source: https://github.com/DavidHDev/react-bits/tree/main/src/content/Backgrounds/Silk
+ * License: assets/REACT-BITS-LICENSE. No React runtime needed for this 2D pass.
+ */
+(() => {
+  const canvas = document.querySelector('#silk-background');
+  const control = document.querySelector('#background-motion');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const contrast = matchMedia('(prefers-contrast: more)');
+  let enabled = !reduced.matches;
+  try { enabled = localStorage.getItem('jaeha.background-motion') !== 'off' && !reduced.matches; } catch {}
+  const gl = canvas.getContext('webgl', {alpha:false, antialias:false, depth:false, powerPreference:'low-power'});
+  const unavailable = () => {
+    canvas.hidden = true;
+    control.disabled = true;
+    control.setAttribute('aria-label', 'Animated background unavailable');
+    control.title = 'Animated background unavailable';
+  };
+  if (!gl) { unavailable(); return; }
+  const vertex = `attribute vec2 position;
+    varying vec2 vUv;
+    void main(){vUv=position*.5+.5;gl_Position=vec4(position,0.,1.);}`;
+  const fragment = `precision mediump float;
+    varying vec2 vUv;
+    uniform float time;
+    uniform float dark;
+    uniform float aspect;
+    void main(){
+      vec2 uv=vUv;
+      uv.x=(uv.x-.5)*min(aspect,1.8)+.5;
+      vec2 tex=uv*1.15;
+      float tOffset=time*.65;
+      tex.y+=.03*sin(8.*tex.x-tOffset);
+      float pattern=.6+.4*sin(5.*(tex.x+tex.y+
+        cos(3.*tex.x+5.*tex.y)+.02*tOffset)+
+        sin(20.*(tex.x+tex.y-.1*tOffset)));
+      float fold=smoothstep(.15,1.,pattern);
+      float edge=smoothstep(.15,.5,abs(vUv.x-.5));
+      float strength=mix(.25,1.,edge);
+      float lightShade=.953+(fold-.5)*.16*strength;
+      float darkShade=.086+(fold-.5)*.12*strength;
+      gl_FragColor=vec4(vec3(mix(lightShade,darkShade,dark)),1.);
+    }`;
+  const shaders = [];
+  let program;
+  try {
+    const compile = (type,source) => {
+      const shader=gl.createShader(type);
+      shaders.push(shader);
+      gl.shaderSource(shader,source);gl.compileShader(shader);
+      if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS))throw Error('Background shader compilation failed');
+      return shader;
+    };
+    program=gl.createProgram();
+    gl.attachShader(program,compile(gl.VERTEX_SHADER,vertex));
+    gl.attachShader(program,compile(gl.FRAGMENT_SHADER,fragment));
+    gl.linkProgram(program);
+    if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('Background shader link failed');
+  } catch {
+    shaders.forEach(shader=>gl.deleteShader(shader));
+    if(program)gl.deleteProgram(program);
+    unavailable();return;
+  }
+  gl.useProgram(program);
+  const buffer=gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
+  const position=gl.getAttribLocation(program,'position');
+  gl.enableVertexAttribArray(position);gl.vertexAttribPointer(position,2,gl.FLOAT,false,0,0);
+  const uniforms=Object.fromEntries(['time','dark','aspect'].map(name=>[name,gl.getUniformLocation(program,name)]));
+  let frame=0, elapsed=12, previous=0, lost=false;
+  const shouldAnimate=()=>enabled&&!reduced.matches&&!contrast.matches&&!document.hidden&&!lost;
+  const draw=()=>{
+    if(lost)return;
+    canvas.hidden=contrast.matches;
+    gl.uniform1f(uniforms.time,elapsed);
+    gl.uniform1f(uniforms.dark,document.documentElement.dataset.theme==='dark'?1:0);
+    gl.uniform1f(uniforms.aspect,innerWidth/innerHeight);
+    gl.drawArrays(gl.TRIANGLES,0,6);
+  };
+  const tick=now=>{
+    frame=0;
+    if(!shouldAnimate())return;
+    // 30 fps and a bounded pixel budget keep the ambient layer inexpensive.
+    if(now-previous>=1000/30){elapsed+=Math.min((now-previous)/1000,.08);previous=now;draw();}
+    frame=requestAnimationFrame(tick);
+  };
+  const refresh=()=>{
+    cancelAnimationFrame(frame);frame=0;previous=performance.now();
+    const active=enabled&&!reduced.matches&&!contrast.matches;
+    control.disabled=reduced.matches||contrast.matches;
+    control.setAttribute('aria-pressed',String(active));
+    const label=control.disabled?'Background motion disabled by accessibility settings':active?'Pause background animation':'Play background animation';
+    control.title=label;control.setAttribute('aria-label',label);
+    control.innerHTML=`<i data-lucide="${active?'pause':'play'}" aria-hidden="true"></i>`;
+    lucide.createIcons({attrs:{'stroke-width':1.6}});
+    draw();if(shouldAnimate())frame=requestAnimationFrame(tick);
+  };
+  const resize=()=>{
+    const scale=Math.min(1,1280/innerWidth,900/innerHeight);
+    canvas.width=Math.max(1,Math.round(innerWidth*scale));
+    canvas.height=Math.max(1,Math.round(innerHeight*scale));
+    gl.viewport(0,0,canvas.width,canvas.height);draw();
+  };
+  control.addEventListener('click',()=>{
+    enabled=!enabled;
+    try{localStorage.setItem('jaeha.background-motion',enabled?'on':'off')}catch{}
+    refresh();
+  });
+  addEventListener('resize',resize,{passive:true});
+  document.addEventListener('visibilitychange',refresh);
+  reduced.addEventListener('change',refresh);
+  contrast.addEventListener('change',refresh);
+  new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();lost=true;cancelAnimationFrame(frame);unavailable()});
+  resize();refresh();
+})();

@@ -32,6 +32,8 @@
 
 ## Asset attribution
 
+- `background.js`: website-specific adaptation of React Bits Silk (David Haz), https://github.com/DavidHDev/react-bits/tree/main/src/content/Backgrounds/Silk . License: `assets/REACT-BITS-LICENSE` (MIT + Commons Clause); used as part of this website, not a standalone component distribution.
+
 - `assets/lucide.min.js`: Lucide 0.468.0, locally hosted; see `assets/LUCIDE-LICENSE`.
 
 - `assets/paver.png`: owner's PAVER `assets/fig/overview5.png`.
