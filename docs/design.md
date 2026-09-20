@@ -3,7 +3,7 @@
 ## Owner requirements
 
 - Neutral grayscale page and material backgrounds. No blue-tinted gray, colored background wash, decorative orbs, or diagonal gradients.
-- No profile photograph until the owner supplies one.
+- Reserve a blank portrait slot, 3:4 aspect ratio (240 x 320 px desktop). No profile photograph until the owner supplies one. Keep its size stable when adding the image. Mobile uses a smaller portrait next to the identity, with the biography below both.
 - Research identity is broader than RideFlux. Mention RideFlux in its internship and industry-academia project entries, not as the introduction's central theme.
 - Exclude domestic papers. Keep awards separate.
 - Borrow the quality and continuity of PAVER controls, not its project-page layout.
