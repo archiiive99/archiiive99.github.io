@@ -41,6 +41,8 @@
 
 ## Asset attribution
 
+- Main-figure thumbnails supersede the first-page previews: Swin-Trajectory Fig. 1 (PDF page 2), ICAIIC occupancy Fig. 1 (page 2), ICAIIC mapping Fig. 1 (page 2), BMVC DTS Fig. 2 (page 4), YMJ Fig. 1 (page 3). Extracted directly with pdftoppm at 2400px page resolution, excluding captions/body text; no generated or redrawn scientific content. PAVER and SGLDet are unchanged. RSD-BEV manuscript/figure is still unavailable.
+
 ## Project Contribution Verification (2026-09-21)
 
 Public Notion detail pages verified for one-sentence contribution descriptions:
