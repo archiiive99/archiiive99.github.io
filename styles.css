@@ -99,7 +99,6 @@ h1 span { display: inline-block; font-size: 18px; color: var(--muted); font-weig
 .figure-dialog::backdrop { background: rgb(0 0 0 / .6); backdrop-filter: blur(6px); }
 .figure-dialog img { display: block; width: 100%; max-height: calc(90dvh - 80px); object-fit: contain; }
 .figure-close { position: absolute; top: 4px; right: 4px; width: 40px; height: 40px; display: grid; place-items: center; border: 0; border-radius: 50%; background: var(--track); color: var(--fg); }
-.equal-contribution { font-size: 13px; color: var(--muted); margin-top: 6px; }
 .pub-links:empty { display: none; }
 @media (max-width: 540px) {
   .publication.with-thumbnail { grid-template-columns: minmax(0,1fr) 80px; gap: 14px; align-items: start; }
