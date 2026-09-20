@@ -6,15 +6,11 @@ const publications = [
   {year:2025,venue:'ICAIIC 2025',title:'Efficient Occupancy Prediction with Instance-Level Attention',authors:'Sungjin Park, Jaeha Song, Soonmin Hwang',links:[['Publication record','https://ircv.hanyang.ac.kr/publications/']]},
   {year:2025,venue:'ICAIIC 2025',title:'Leveraging Camera-Based Methods for Enhanced Feature-to-World Mapping',authors:'Jaeha Song, Sungjin Park, Soonmin Hwang',links:[['Publication record','https://ircv.hanyang.ac.kr/publications/']]},
   {year:2024,venue:'BMVC 2024',title:'Advancing Medical Image Segmentation: Morphology-Driven Learning with Diffusion Transformer',authors:'Sungmin Kang, Jaeha Song, Jihie Kim',links:[['Research profile','https://ircv.hanyang.ac.kr/team/jaeha-song']]},
-  {year:2024,venue:'KSAE 2024',title:'Mitigating Class Misalignment and Imbalance in Multi-Dataset Integration for 2D Object Detection through Pseudo Labeling',authors:'Jaeha Song, Eunseo Yoon, Kyoungsu Cho, Soonmin Hwang',description:'Best Poster Award, KSAE Autumn Conference.',links:[]},
   {year:2024,venue:'Yonsei Medical Journal',title:'Detection of Cervical Foraminal Stenosis From Oblique Radiograph Using Convolutional Neural Network Algorithm',authors:'Jihie Kim, Jae Jun Yang, Jaeha Song, SeongWoon Jo, YoungHoon Kim, Jiho Park, Jinbok Lee, Gun Woo Lee, Sehan Park',links:[['Research profile','https://ircv.hanyang.ac.kr/team/jaeha-song']]},
-  {year:2023,venue:'Journal of Korean Institute of Intelligent Systems',title:'AI docent technology research with generative facial recognition, natural language and speech analytics',authors:'Byounggun Park, Jaeha Song, Nakyoung Lee, Jin-Woo Jung',links:[]},
-  {year:2023,venue:'KSC 2023',title:'Deep Learning-Based Pancreas Detection and Size Monitoring with Data Augmentation for Medical Imaging Analysis',authors:'Sungmin Kang, Jaeha Song, Jihie Kim',links:[]},
-  {year:2023,venue:'KSAE 2023',title:'CNN-based road scene understanding for autonomous vehicles',authors:'Byounggun Park, Jaeha Song, Yunsick Sung',links:[]}
 ];
 // All content is maintained locally, not supplied by runtime HTML or a remote API.
 const escapeHTML = value => value.replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-document.querySelector('#publications').innerHTML = publications.map(p => `<article class="publication" data-year="${p.year}"><div class="pub-visual ${p.image?'':'type'}">${p.image?`<img src="${p.image}" alt="${escapeHTML(p.alt)}" loading="lazy" width="540" height="348">`:escapeHTML(p.venue)}</div><div><div class="pub-meta"><span class="venue ${p.type||''}">${escapeHTML(p.venue)}</span><span>${p.year}</span></div><h3>${escapeHTML(p.title)}</h3><p class="authors">${escapeHTML(p.authors).replaceAll('Jaeha Song','<strong>Jaeha Song</strong>')}</p>${p.description?`<p class="pub-description">${escapeHTML(p.description)}</p>`:''}<div class="pub-links">${p.links.map(([name,url])=>`<a href="${url}">${name} ↗</a>`).join('')}</div></div></article>`).join('');
+document.querySelector('#publications').innerHTML = publications.map(p => `<article class="publication ${p.image?'featured':''}" data-year="${p.year}">${p.image?`<a class="pub-visual" href="${p.links.find(([name])=>name==='Project')[1]}" aria-label="${escapeHTML(p.title)} project"><img src="${p.image}" alt="${escapeHTML(p.alt)}" loading="lazy" width="960" height="350"></a>`:''}<div class="pub-body"><div class="pub-meta"><span class="venue ${p.type||''}">${escapeHTML(p.venue)}</span><span>${p.year}</span></div><h3>${escapeHTML(p.title)}</h3><p class="authors">${escapeHTML(p.authors).replaceAll('Jaeha Song','<strong>Jaeha Song</strong>')}</p>${p.description?`<p class="pub-description">${escapeHTML(p.description)}</p>`:''}<div class="pub-links">${p.links.map(([name,url])=>`<a href="${url}">${name} ↗</a>`).join('')}</div></div></article>`).join('');
 for(const button of document.querySelectorAll('[data-filter]')) button.addEventListener('click',()=>{
   document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
   document.querySelectorAll('.publication').forEach(row=>row.hidden=button.dataset.filter==='2026'?row.dataset.year!=='2026':button.dataset.filter==='earlier'?row.dataset.year==='2026':false);
@@ -22,7 +18,33 @@ for(const button of document.querySelectorAll('[data-filter]')) button.addEventL
 function setTheme(theme){
   document.documentElement.dataset.theme=theme;
   document.querySelectorAll('[data-theme-choice]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeChoice===theme)));
-  document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#101214':'#f7f8fa';
+  document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#141414':'#fafafa';
 }
 setTheme(document.documentElement.dataset.theme);
 for(const button of document.querySelectorAll('[data-theme-choice]'))button.addEventListener('click',()=>{setTheme(button.dataset.themeChoice);try{localStorage.setItem('jaeha.theme',button.dataset.themeChoice)}catch{}});
+
+// A single moving lens preserves continuity between selections.
+document.querySelectorAll('.segmented').forEach(group=>{
+  const lens=document.createElement('span');
+  lens.className='selection-lens';
+  lens.setAttribute('aria-hidden','true');
+  group.prepend(lens);
+  const position=()=>{
+    const active=group.querySelector('[aria-pressed="true"]');
+    lens.style.width=`${active.offsetWidth}px`;
+    lens.style.height=`${active.offsetHeight}px`;
+    lens.style.transform=`translate(${active.offsetLeft}px,${active.offsetTop}px)`;
+  };
+  position();
+  requestAnimationFrame(()=>group.classList.add('lens-ready'));
+  group.addEventListener('click',position);
+  new ResizeObserver(position).observe(group);
+});
+
+const navigation=[...document.querySelectorAll('nav a')];
+const updateNavigation=()=>{
+  const active=[...navigation].reverse().find(a=>document.querySelector(a.hash).getBoundingClientRect().top<=160);
+  navigation.forEach(a=>{if(a===active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')});
+};
+addEventListener('scroll',updateNavigation,{passive:true});
+updateNavigation();

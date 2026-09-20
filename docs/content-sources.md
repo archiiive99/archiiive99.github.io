@@ -17,6 +17,9 @@
 - RideFlux research collaboration: August 2026 onward, knowledge-distillation-based end-to-end autonomous driving; owner's responsibility is pretraining.
 - ICPR 2026: RSD-BEV, confirmed against lab publication record.
 - Profile photograph must be supplied by owner. No Notion photo is republished.
+- Exclude domestic papers: KSAE 2023/2024, KSC 2023, Journal of Korean Institute of Intelligent Systems. Retain international publications including Yonsei Medical Journal. Awards are separate from publication entries.
+- The August 2026 RideFlux collaboration is an industry–academia project, not employment. Display in Projects with Pretraining as the owner's role. Do not make RideFlux the central biographical theme.
+- Backgrounds and glass surfaces must use neutral grayscale, never blue-tinted gray.
 
 ## Unresolved details
 
