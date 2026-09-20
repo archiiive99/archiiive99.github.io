@@ -3,6 +3,20 @@
  * License: assets/REACT-BITS-LICENSE. No React runtime needed for this 2D pass.
  */
 (() => {
+  // Static film grain: generated once, below text and figures, never flickering.
+  const grain=document.createElement('canvas');
+  grain.width=196;grain.height=196;
+  const grainContext=grain.getContext('2d');
+  const grainPixels=grainContext.createImageData(196,196);
+  let seed=99173;
+  for(let i=0;i<grainPixels.data.length;i+=4){
+    seed=(Math.imul(1664525,seed)+1013904223)>>>0;
+    const value=seed>>>24;
+    grainPixels.data[i]=grainPixels.data[i+1]=grainPixels.data[i+2]=value;
+    grainPixels.data[i+3]=255;
+  }
+  grainContext.putImageData(grainPixels,0,0);
+  document.body.style.setProperty('--grain-image',`url("${grain.toDataURL()}")`);
   const canvas = document.querySelector('#silk-background');
   const control = document.querySelector('#background-motion');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');

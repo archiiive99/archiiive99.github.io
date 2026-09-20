@@ -7,24 +7,30 @@ if (/Chrome\//.test(navigator.userAgent) && CSS.supports('backdrop-filter', 'url
   svg.style.cssText = 'position:fixed;width:0;height:0;pointer-events:none';
   const defs = document.createElementNS(ns, 'defs');
   svg.append(defs);
+  document.body.append(svg);
+  const controls=document.querySelectorAll('nav, .button, .pub-links a, .theme-control, .wordmark');
+  const maps=new Map();
+  controls.forEach((control,index)=>{
   const filter = document.createElementNS(ns, 'filter');
-  filter.id = 'nav-refraction';
+  filter.id = `control-refraction-${index}`;
   filter.setAttribute('color-interpolation-filters', 'sRGB');
   const map = document.createElementNS(ns, 'feImage');
   map.setAttribute('result', 'rim');
   map.setAttribute('preserveAspectRatio', 'none');
   const displacement = document.createElementNS(ns, 'feDisplacementMap');
-  for (const [key,value] of Object.entries({in:'SourceGraphic',in2:'rim',scale:'10',xChannelSelector:'R',yChannelSelector:'G'})) displacement.setAttribute(key,value);
+  for (const [key,value] of Object.entries({in:'SourceGraphic',in2:'rim',scale:'7',xChannelSelector:'R',yChannelSelector:'G'})) displacement.setAttribute(key,value);
   filter.append(map, displacement);
   defs.append(filter);
-  document.body.append(svg);
-  const nav = document.querySelector('nav');
   let previousSize = '';
   const update = () => {
-    const {width,height} = nav.getBoundingClientRect();
+    const {width,height} = control.getBoundingClientRect();
     const w = Math.ceil(width), h = Math.ceil(height);
     if (!w || !h || previousSize === `${w}:${h}`) return;
     previousSize = `${w}:${h}`;
+    if(maps.has(previousSize)){
+      map.setAttribute('href',maps.get(previousSize));
+      return;
+    }
     const canvas = document.createElement('canvas');
     canvas.width = w; canvas.height = h;
     const ctx = canvas.getContext('2d');
@@ -42,9 +48,14 @@ if (/Chrome\//.test(navigator.userAgent) && CSS.supports('backdrop-filter', 'url
       pixels.data[index+2]=128; pixels.data[index+3]=255;
     }
     ctx.putImageData(pixels,0,0);
-    map.setAttribute('href',canvas.toDataURL());
-    nav.classList.add('refractive');
+    const image=canvas.toDataURL();
+    map.setAttribute('href',image);
+    if(maps.size>64)maps.clear();
+    maps.set(previousSize,image);
   };
-  new ResizeObserver(update).observe(nav);
+  control.style.setProperty('--refraction',`url("#${filter.id}")`);
+  control.classList.add('refractive');
+  new ResizeObserver(update).observe(control);
   update();
+  });
 }
