@@ -13,13 +13,16 @@
 
 - PAVER is Under Review. Do not claim acceptance or a specific reviewing venue.
 - RideFlux internship: December 2025 through February 2026.
-- Compute support: 16 NVIDIA B200 GPUs, May through July 2026. Provider and program not specified; do not invent a grant or monetary value.
+- Compute support was supplied by owner, but owner subsequently requested removing the B200 entry from the public page (both news and awards/support).
 - RideFlux research collaboration: August 2026 onward, knowledge-distillation-based end-to-end autonomous driving; owner's responsibility is pretraining.
 - ICPR 2026: RSD-BEV, confirmed against lab publication record.
 - Profile photograph must be supplied by owner. No Notion photo is republished.
 - Exclude domestic papers: KSAE 2023/2024, KSC 2023, Journal of Korean Institute of Intelligent Systems. Retain international publications including Yonsei Medical Journal. Awards are separate from publication entries.
 - The August 2026 RideFlux collaboration is an industry–academia project, not employment. Display in Projects with Pretraining as the owner's role. Do not make RideFlux the central biographical theme.
 - Backgrounds and glass surfaces must use neutral grayscale, never blue-tinted gray.
+- Intro cleanup: remove Korean name, 'Autonomous driving research' eyebrow and introductory Research profile link. Keep professional biography and publication records.
+- English certification requested; exam name, score/level and date are pending owner confirmation. Do not fabricate a credential or publish an empty certification entry.
+- PAVER arXiv preprint is coming soon, per owner. News is an announcement in September 2026, not a claim of an existing arXiv release or a confirmed publication date. Paper status remains Under Review.
 
 ## Unresolved details
 
