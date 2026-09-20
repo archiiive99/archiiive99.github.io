@@ -48,7 +48,8 @@
       float chrome=clamp(.1/max(abs(sin(t-uv.y-uv.x)),.001),0.,1.);
       float edge=smoothstep(.10,.55,abs(vUv.x-.5));
       float strength=mix(.64,1.,edge);
-      float lightShade=.955-(1.-chrome)*.19*strength;
+      // Dark reflections on a light base retain the chrome shape after blur.
+      float lightShade=.97-pow(chrome,.8)*.30*strength;
       float darkShade=.065+chrome*.34*strength;
       gl_FragColor=vec4(vec3(mix(lightShade,darkShade,dark)),1.);
     }`;
