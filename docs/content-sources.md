@@ -11,6 +11,8 @@
 
 ## Owner updates, authoritative over old portfolio
 
+- Doctoral studies began September 2026, confirmed by owner. Integrate the existing Soonmin Hwang research/advisor sentence into the opening biography rather than a separate secondary paragraph. Doctoral institution and degree-program name remain unconfirmed.
+
 - Owner confirmed current Ph.D. student status and requested completed B.S./M.S. in the introduction. Use Dongguk Computer Engineering and Hanyang Automotive Engineering from existing records. Doctoral institution, major and start date await confirmation; do not infer them from lab affiliation. Email confirmed as archiiive99@gmail.com.
 
 - Current research interests: End-to-End Autonomous Driving, Closed-loop Evaluation, 3D Gaussian Splatting, and Pretraining. This supersedes the old Notion-derived interest summary; historical project descriptions remain factual to those projects.
