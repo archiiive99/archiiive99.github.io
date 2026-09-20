@@ -18,9 +18,17 @@ function venueBadge(p) {
 }
 document.querySelector('#publications').innerHTML = publications.map(p => `<article class="publication ${p.image?'featured':''}" data-year="${p.year}">${p.image?`<a class="pub-visual" href="${p.links.find(([name])=>name==='Project')[1]}" aria-label="${escapeHTML(p.title)} project"><img src="${p.image}" alt="${escapeHTML(p.alt)}" loading="lazy" width="960" height="350"><span class="figure-link">${icon('arrow-up-right')}</span></a>`:''}<div class="pub-body"><div class="pub-meta">${venueBadge(p)}</div><h3>${escapeHTML(p.title)}</h3><p class="authors">${escapeHTML(p.authors).replaceAll('Jaeha Song','<strong>Jaeha Song</strong>')}</p>${p.description?`<p class="pub-description">${escapeHTML(p.description)}</p>`:''}<div class="pub-links">${p.links.map(([name,url])=>`<a href="${url}">${icon(name==='Code'?'github':name==='Paper'?'file-text':'arrow-up-right')}${name}</a>`).join('')}</div></div></article>`).join('');
 lucide.createIcons({attrs:{'stroke-width':1.6}});
+function setPublicationFilter(value){
+  const filter=['all','2026','earlier'].includes(value)?value:'all';
+  document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===filter)));
+  document.querySelectorAll('.publication').forEach(row=>row.hidden=filter==='2026'?row.dataset.year!=='2026':filter==='earlier'?row.dataset.year==='2026':false);
+}
+let savedFilter='all';
+try{savedFilter=localStorage.getItem('jaeha.publication-filter')}catch{}
+setPublicationFilter(savedFilter);
 for(const button of document.querySelectorAll('[data-filter]')) button.addEventListener('click',()=>{
-  document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
-  document.querySelectorAll('.publication').forEach(row=>row.hidden=button.dataset.filter==='2026'?row.dataset.year!=='2026':button.dataset.filter==='earlier'?row.dataset.year==='2026':false);
+  setPublicationFilter(button.dataset.filter);
+  try{localStorage.setItem('jaeha.publication-filter',button.dataset.filter)}catch{}
 });
 function setTheme(theme){
   document.documentElement.dataset.theme=theme;
@@ -30,28 +38,62 @@ function setTheme(theme){
 setTheme(document.documentElement.dataset.theme);
 for(const button of document.querySelectorAll('[data-theme-choice]'))button.addEventListener('click',()=>{setTheme(button.dataset.themeChoice);try{localStorage.setItem('jaeha.theme',button.dataset.themeChoice)}catch{}});
 
-// A single moving lens preserves continuity between selections.
-document.querySelectorAll('.segmented').forEach(group=>{
+// Lens boxes follow controls, including changes to the font or viewport.
+function createLens(group,selector){
   const lens=document.createElement('span');
   lens.className='selection-lens';
   lens.setAttribute('aria-hidden','true');
   group.prepend(lens);
   const position=()=>{
-    const active=group.querySelector('[aria-pressed="true"]');
+    const active=group.querySelector(selector);
+    if(!active)return;
     lens.style.width=`${active.offsetWidth}px`;
     lens.style.height=`${active.offsetHeight}px`;
     lens.style.transform=`translate(${active.offsetLeft}px,${active.offsetTop}px)`;
   };
   position();
-  requestAnimationFrame(()=>group.classList.add('lens-ready'));
-  group.addEventListener('click',position);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>group.classList.add('lens-ready')));
   new ResizeObserver(position).observe(group);
+  document.fonts.ready.then(position);
+  return position;
+}
+document.querySelectorAll('.segmented').forEach(group=>{
+  const position=createLens(group,'[aria-pressed="true"]');
+  group.addEventListener('click',position);
+  group.addEventListener('keydown',event=>{
+    const buttons=[...group.querySelectorAll('button:not(:disabled)')];
+    const index=buttons.indexOf(document.activeElement);
+    if(index<0)return;
+    let next;
+    if(event.key==='ArrowRight')next=(index+1)%buttons.length;
+    else if(event.key==='ArrowLeft')next=(index+buttons.length-1)%buttons.length;
+    else if(event.key==='Home')next=0;
+    else if(event.key==='End')next=buttons.length-1;
+    else return;
+    event.preventDefault();buttons[next].focus({preventScroll:true});buttons[next].click();
+  });
 });
 
 const navigation=[...document.querySelectorAll('nav a')];
+const nav=document.querySelector('nav');
+const positionNavigation=createLens(nav,'[aria-current]');
+const header=document.querySelector('.site-header');
+let headerOffset=112;
 const updateNavigation=()=>{
-  const active=[...navigation].reverse().find(a=>document.querySelector(a.hash).getBoundingClientRect().top<=160);
+  const atBottom=scrollY>0&&scrollY+innerHeight>=document.documentElement.scrollHeight-2;
+  const active=atBottom?navigation.at(-1):[...navigation].reverse().find(a=>document.querySelector(a.hash).getBoundingClientRect().top<=headerOffset+8);
   navigation.forEach(a=>{if(a===active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')});
+  nav.classList.toggle('has-current',!!active);
+  positionNavigation();
 };
-addEventListener('scroll',updateNavigation,{passive:true});
+let scrollFrame=0;
+addEventListener('scroll',()=>{
+  if(scrollFrame)return;
+  scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;updateNavigation()});
+},{passive:true});
+new ResizeObserver(()=>{
+  headerOffset=Math.ceil(header.getBoundingClientRect().height)+20;
+  document.documentElement.style.setProperty('--header-offset',`${headerOffset}px`);
+  updateNavigation();
+}).observe(header);
 updateNavigation();

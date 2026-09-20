@@ -25,6 +25,8 @@ This is a web implementation, not Apple's native Liquid Glass API or a claim of 
 
 Selected segmented controls share a moving lens with a short spring-like cubic-bezier transition. Reduced motion disables transitions without changing lens position. Increased contrast removes translucency/refraction.
 
+Header geometry: 56px outer shells, 44px square theme and motion targets, equal-width navigation items. Theme and motion share one glass shell, without nested backdrop filters. Do not let generic text-button padding override icon-button sizing. Dynamic header height drives both anchor offset and active-section tracking. At 900px and below navigation moves to its own centered row. See `header-50.md` for the second 50-item checklist.
+
 ## Maintenance
 
 Readability floor: description/body 16px, authors 15px, dates/secondary labels 14px (venue metadata 13px). Do not shrink these on mobile to make layouts fit; reflow the layout instead. Neutral translucent full-width reading bands reduce background interference without turning sections into floating cards. See `readability-50.md` for the implementation and verification checklist.
