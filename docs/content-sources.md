@@ -11,6 +11,8 @@
 
 ## Owner updates, authoritative over old portfolio
 
+- Current research interests: End-to-End Autonomous Driving, Closed-loop Evaluation, 3D Gaussian Splatting, and Pretraining. This supersedes the old Notion-derived interest summary; historical project descriptions remain factual to those projects.
+
 - PAVER is Under Review. Do not claim acceptance or a specific reviewing venue.
 - RideFlux internship: December 2025 through February 2026.
 - Compute support was supplied by owner, but owner subsequently requested removing the B200 entry from the public page (both news and awards/support).
