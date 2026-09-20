@@ -12,9 +12,9 @@
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: var(--header-offset); }
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-offset); overscroll-behavior-y: none; }
 body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0; -webkit-font-smoothing: antialiased; }
-body { isolation: isolate; }
+body { isolation: isolate; padding-top: var(--nav-height,53px); overscroll-behavior-y: none; }
 #silk-background { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; filter: blur(10px); transform: scale(1.04); }
 body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background-image: var(--grain-image, none); background-size: 196px 196px; opacity: .025; }
 [data-theme="dark"] body::before { opacity: .022; }
@@ -37,7 +37,7 @@ button,a { -webkit-tap-highlight-color: transparent; }
 .lucide { width: 16px; height: 16px; flex-shrink: 0; }
 .skip { position: fixed; left: 12px; top: -100px; padding: 12px 20px; background: var(--bg); z-index: 50; }
 .skip:focus { top: 12px; }
-.site-header { position: sticky; top: 0; z-index: 10; pointer-events: none; }
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 10; pointer-events: none; }
 .nav-inner { max-width: 1200px; padding: max(4px,env(safe-area-inset-top)) max(24px,env(safe-area-inset-right)) 4px max(24px,env(safe-area-inset-left)); margin: auto; min-height: 52px; display: grid; grid-template-columns: minmax(0,1fr) 390px minmax(0,1fr); align-items: center; gap: 24px; }
 .nav-inner > * { pointer-events: auto; }
 .wordmark { display: inline-flex; align-items: center; width: fit-content; min-height: var(--header-target); color: var(--fg); font-size: 20px; font-weight: 650; padding: 0; white-space: nowrap; }
@@ -174,6 +174,7 @@ footer { max-width: 1040px; margin: auto; padding: 0 0 40px; display: flex; just
   footer { margin: 0 40px; }
 }
 @media (max-width: 900px) {
+  body { --nav-height: 99px; }
   .nav-inner { padding: max(4px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 4px max(16px,env(safe-area-inset-left)); grid-template-columns: minmax(0,1fr) auto; gap: 2px 8px; }
   nav { grid-row: 2; grid-column: 1 / -1; justify-self: center; width: min(360px,100%); }
   .wordmark { padding: 0; }

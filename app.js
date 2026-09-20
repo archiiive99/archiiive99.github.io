@@ -125,6 +125,7 @@ addEventListener('scroll',()=>{
 },{passive:true});
 new ResizeObserver(()=>{
   headerOffset=Math.ceil(header.getBoundingClientRect().height)+20;
+  document.body.style.setProperty('--nav-height',`${headerOffset-20}px`);
   document.documentElement.style.setProperty('--header-offset',`${headerOffset}px`);
   updateNavigation();
 }).observe(header);
