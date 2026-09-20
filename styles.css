@@ -127,7 +127,7 @@ h1 span { display: inline-block; font-size: 18px; color: var(--muted); font-weig
 .industry-project + .industry-project { margin-top: 32px; }
 .industry-project > p { margin-top: 10px; }
 .project-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; }
-.project-meta .venue { border: none; background: none; font-size: 16px; padding: 0; }
+.project-meta > span:first-child { font-size: 16px; font-weight: 400; color: var(--fg); }
 .industry-project h3 { max-width: 660px; font-size: 21px; }
 .project-details { display: flex; flex-wrap: wrap; gap: 20px 64px; margin: 24px 0 0; font-size: 16px; }
 .project-details dt { color: var(--muted); font-size: 14px; }
