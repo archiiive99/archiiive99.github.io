@@ -1,4 +1,5 @@
-/* Monochrome aurora curtains; retain the lightweight background runtime. */
+/* Independently implemented monochrome wave field, inspired by the public
+ * Chroma Waves preview. No React Bits Pro source code is incorporated. */
 (() => {
   // Static film grain: generated once, below text and figures, never flickering.
   const grain=document.createElement('canvas');
@@ -43,27 +44,25 @@
       vec2 cursor=vec2((pointer.x-.5)*min(aspect,1.8)+.5,pointer.y);
       vec2 offset=uv-cursor;
       float influence=exp(-dot(offset,offset)*4.)*pointer.z;
-      uv+=offset*.10*influence;
-      uv+=(cursor-vec2(.5))*.018*pointer.z;
-      float t=time*.18;
-      float curtains=0.;
-      for(int i=0;i<3;i++){
-        float layer=float(i);
-        float x=uv.x+layer*.37;
-        float center=.23+layer*.24
-          +.13*sin(x*3.4+t+layer)
-          +.045*sin(x*7.1-t*.7+layer*1.8);
-        float distance=uv.y-center;
-        float width=.055+.025*sin(x*2.8+t*.5+layer);
-        float ribbon=exp(-distance*distance/(width*width));
-        float veil=exp(-distance*distance/.045);
-        float pleats=.84+.16*sin(x*29.+sin(x*6.-t)*2.5+t);
-        curtains+=(ribbon*.7+veil*.3)*pleats;
-      }
+      uv+=offset*.32*influence;
+      uv+=(cursor-vec2(.5))*.045*pointer.z;
+      float t=time*.32;
+      vec2 p=uv*3.8;
+      // Two scales of smooth distortion form connected, flowing wave fronts.
+      vec2 bend=vec2(
+        sin(p.y*1.25+t*.7)+.45*cos(p.x*1.7-t*.45),
+        sin(p.x*1.15-t*.65)+.40*cos(p.y*1.6+t*.5));
+      vec2 flow=p+bend*.8;
+      float phase=flow.y*3.5+flow.x*.65
+        +1.1*sin(flow.x*1.5+t*.55)-t;
+      float wave=.5+.5*sin(phase);
+      float crest=smoothstep(.32,.95,wave);
+      float fold=.5+.5*sin(phase+.65+.3*sin(flow.y-t*.4));
+      float curtains=crest*.80+fold*.20;
       float edge=smoothstep(.08,.55,abs(vUv.x-.5));
       float strength=mix(.64,1.,edge);
-      float lightShade=.955-curtains*.20*strength;
-      float darkShade=.075+curtains*.25*strength;
+      float lightShade=.965-curtains*.22*strength;
+      float darkShade=.055+curtains*.27*strength;
       gl_FragColor=vec4(vec3(mix(lightShade,darkShade,dark)),1.);
     }`;
   const shaders = [];

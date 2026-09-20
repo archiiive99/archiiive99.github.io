@@ -23,7 +23,7 @@
 - The August 2026 RideFlux collaboration is an industry–academia project, not employment. Display in Projects with Pretraining as the owner's role. Do not make RideFlux the central biographical theme.
 - Backgrounds and glass surfaces must use neutral grayscale, never blue-tinted gray.
 - Intro cleanup: remove Korean name, 'Autonomous driving research' eyebrow and introductory Research profile link. Keep professional biography and publication records.
-- English certification requested; exam name, score/level and date are pending owner confirmation. Do not fabricate a credential or publish an empty certification entry.
+- English certifications recovered from the public Notion collection: TOEIC Speaking Advanced Low (June 2024), TOEIC 775/990 (April 2024), OPIc Intermediate High (December 2023). Dates are historical attainment dates, not claims of current validity.
 - PAVER arXiv preprint is coming soon, per owner. News is an announcement in September 2026, not a claim of an existing arXiv release or a confirmed publication date. Paper status remains Under Review.
 
 ## Unresolved details
@@ -32,10 +32,15 @@
 - Master's graduation was expected August 2026 in Notion. No completion confirmed. Use 'M.S. studies' and 'From Sep 2024'; do not assert awarded degree or current student status.
 - Dongguk internship end varies between December 2023, January 2024, February 2024. Show broad 2023–2024 pending confirmation.
 - Notion SGLDet Under Review is stale: official ICLR 2026 proceedings supersedes it.
-- Project, publication, award, slide, skill and certificate Notion database views returned 'No results' publicly. Do not claim complete import of inaccessible database entries.
+- Earlier DOM-only inspection showed 'No results'. Reinspection of public queryCollection responses on 2026-09-21 recovered 5 graduate and 5 undergraduate projects, with hasMore=false, plus 3 certifications. The response uses recordMap v3 with nested value.value records. These 10 projects are now included alongside the owner's new RideFlux project. Exclude stale template fields (Fresh, Art_Directing, project.url, unrelated design award); use actual titles, dates and research topics. Raw responses and personal contact information are not committed.
 - No phone number, street address or raw Notion export is published.
 
 ## Asset attribution
+
+- Compact publication thumbnails are first-page renders of actual papers, not generated illustrations: Waymo official Swin-Trajectory report; arXiv 2408.00347 (BMVC); YMJ DOI 10.3349/ymj.2023.0091; ICAIIC official program PDFs 1571107040 (occupancy) and 1571107345 (mapping) from manuscriptlink/di0zxmb8pwajl.cloudfront.net.
+- RSD-BEV official paper: https://doi.org/10.1007/978-3-032-31438-3_21 . Full PDF requires access; its thumbnail remains pending a supplied manuscript/figure. Do not substitute an unrelated diagram or book cover.
+- All publication fallback links to lab profiles have been removed. Paper buttons point to actual papers/publisher records only.
+- Current background is an independent wave-field shader based on the publicly visible Chroma Waves preview, explicitly approved by owner; no React Bits Pro source is used. Existing free React Bits license remains for historical attribution.
 
 - `background.js`: website-specific adaptation of React Bits Silk (David Haz), https://github.com/DavidHDev/react-bits/tree/main/src/content/Backgrounds/Silk . License: `assets/REACT-BITS-LICENSE` (MIT + Commons Clause); used as part of this website, not a standalone component distribution.
 
