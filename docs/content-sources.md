@@ -17,7 +17,7 @@
 
 - Doctoral studies began September 2026, confirmed by owner. Integrate the existing Soonmin Hwang research/advisor sentence into the opening biography rather than a separate secondary paragraph. Doctoral institution and degree-program name remain unconfirmed.
 
-- Owner confirmed current Ph.D. student status and requested completed B.S./M.S. in the introduction. Use Dongguk Computer Engineering and Hanyang Automotive Engineering from existing records. Doctoral institution, major and start date await confirmation; do not infer them from lab affiliation. Email confirmed as archiiive99@gmail.com.
+- Owner confirmed current Ph.D. student status and requested completed B.S./M.S. in the introduction. Use Dongguk Computer Engineering and Hanyang Automotive Engineering from existing records. Doctoral institution and major await confirmation; do not infer them from lab affiliation. Email confirmed as archiiive99@gmail.com.
 
 - Current research interests: End-to-End Autonomous Driving, Closed-loop Evaluation, 3D Gaussian Splatting, and Pretraining. This supersedes the old Notion-derived interest summary; historical project descriptions remain factual to those projects.
 
@@ -37,7 +37,7 @@
 ## Unresolved details
 
 - Notion embedded CV says Dongguk graduation February 2024; prose and lab profile say August 2024. Use August, matching lab profile and prose.
-- Master's completion is now reflected per owner's latest B.S./M.S./current Ph.D. instruction; exact graduation month is not newly confirmed.
+- Master's graduation month is confirmed as August 2026.
 - Dongguk internship end varies between December 2023, January 2024, February 2024. Show broad 2023–2024 pending confirmation.
 - Notion SGLDet Under Review is stale: official ICLR 2026 proceedings supersedes it.
 - Earlier DOM-only inspection showed 'No results'. Reinspection of public queryCollection responses on 2026-09-21 recovered 5 graduate and 5 undergraduate projects, with hasMore=false, plus 3 certifications. The response uses recordMap v3 with nested value.value records. These 10 projects are now included alongside the owner's new RideFlux project. Exclude stale template fields (Fresh, Art_Directing, project.url, unrelated design award); use actual titles, dates and research topics. Raw responses and personal contact information are not committed.
@@ -66,15 +66,24 @@ Public Notion detail pages verified for one-sentence contribution descriptions:
 
 - `assets/paver-demo.webp`: https://github.com/archiiive99/PAVER/blob/main/assets/vad_tiny_gradcam_demo.webp ; original 40,284,438-byte file, 1200x506, WebP ANIM loop count 0 (infinite). Replaces the static PAVER overview thumbnail; lazily loaded.
 
-- Compact publication thumbnails are first-page renders of actual papers, not generated illustrations: Waymo official Swin-Trajectory report; arXiv 2408.00347 (BMVC); YMJ DOI 10.3349/ymj.2023.0091; ICAIIC official program PDFs 1571107040 (occupancy) and 1571107345 (mapping) from manuscriptlink/di0zxmb8pwajl.cloudfront.net.
+- Original first-page preview files are retained but unused; the live site displays extracted main figures.
 - RSD-BEV official paper: https://doi.org/10.1007/978-3-032-31438-3_21 . Full PDF requires access; its thumbnail remains pending a supplied manuscript/figure. Do not substitute an unrelated diagram or book cover.
 - All publication fallback links to lab profiles have been removed. Paper buttons point to actual papers/publisher records only.
-- Current background is an independent wave-field shader based on the publicly visible Chroma Waves preview, explicitly approved by owner; no React Bits Pro source is used. Existing free React Bits license remains for historical attribution.
+- Historical Chroma Waves-inspired implementation was replaced by Liquid Chrome; no Pro source code was used.
 
-- `background.js`: website-specific adaptation of React Bits Silk (David Haz), https://github.com/DavidHDev/react-bits/tree/main/src/content/Backgrounds/Silk . License: `assets/REACT-BITS-LICENSE` (MIT + Commons Clause); used as part of this website, not a standalone component distribution.
+- Initial Silk implementation is superseded by Liquid Chrome; the same React Bits license is retained.
 
 - `assets/lucide.min.js`: Lucide 0.468.0, locally hosted; see `assets/LUCIDE-LICENSE`.
 
 - `assets/paver.png`: owner's PAVER `assets/fig/overview5.png`.
 - `assets/sgldet.png`: SGLDet `assets/overview.png`, Apache-2.0 repository, linked to original project. See `assets/SGLDet-LICENSE`.
 - Glass control inspiration: PAVER `styles.css`, restrained translucent surface, specular inset border, saturated backdrop, pill controls. Layout is original to this profile, not a reproduction of PAVER's project layout.
+
+## Final Review Updates
+
+- Education/Awards reuse project row markup and styling; Ph.D. Student is used, not Candidate.
+- Swin-Trajectory first three authors and both ICAIIC papers first two authors have equal-contribution marks, verified against the source PDFs.
+- RSD-BEV News links to its DOI. ICPR official accepted-paper list also links to the Springer PDF route, but that route returns the subscription HTML page, not a downloadable PDF. No authenticated access was bypassed; main figure remains pending.
+- PAVER playback uses a 16,355,983-byte H.264 MP4 retaining all 1,163 frames, 1200x506 pixels and 96.916 seconds. Original WebP retained. Video loads on intersection, pauses offscreen and follows reduced-motion preferences.
+- Main figures open in a keyboard-dismissible modal. Navigation clears its active state in Education/Awards/Languages.
+- News includes June 2025 Waymo 3rd place; user date corroborated by the official June technical report and earlier source records.
