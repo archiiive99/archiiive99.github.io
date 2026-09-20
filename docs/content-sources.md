@@ -43,6 +43,8 @@
 
 ## Asset attribution
 
+- Current background supersedes earlier wave experiments: adapted from React Bits LiquidChrome.jsx (David Haz), https://github.com/DavidHDev/react-bits/tree/main/src/content/Backgrounds/LiquidChrome . Existing MIT + Commons Clause notice applies. Retain its iterative coordinate distortion and cursor ripple with grayscale theme remapping, speed 0.16, smoothed pointer and existing CSS blur. Ferrofluid was investigated but not deployed.
+
 - Main-figure thumbnails supersede the first-page previews: Swin-Trajectory Fig. 1 (PDF page 2), ICAIIC occupancy Fig. 1 (page 2), ICAIIC mapping Fig. 1 (page 2), BMVC DTS Fig. 2 (page 4), YMJ Fig. 1 (page 3). Extracted directly with pdftoppm at 2400px page resolution, excluding captions/body text; no generated or redrawn scientific content. PAVER and SGLDet are unchanged. RSD-BEV manuscript/figure is still unavailable.
 
 ## Project Contribution Verification (2026-09-21)
