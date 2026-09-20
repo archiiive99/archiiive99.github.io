@@ -94,3 +94,20 @@ new ResizeObserver(()=>{
   updateNavigation();
 }).observe(header);
 updateNavigation();
+
+// Measure text only: the portrait must not feed its own height back into sizing.
+const intro=document.querySelector('.intro');
+const identity=intro.querySelector('.identity');
+const story=intro.querySelector('.intro-story');
+const portrait=intro.querySelector('.portrait-slot');
+const sizePortrait=()=>{
+  const textHeight=identity.getBoundingClientRect().height+
+    (innerWidth>800?story.getBoundingClientRect().height+parseFloat(getComputedStyle(intro).rowGap):0);
+  portrait.style.setProperty('--portrait-width',`${textHeight*.75}px`);
+};
+const portraitObserver=new ResizeObserver(sizePortrait);
+portraitObserver.observe(identity);
+portraitObserver.observe(story);
+addEventListener('resize',sizePortrait,{passive:true});
+document.fonts.ready.then(sizePortrait);
+sizePortrait();

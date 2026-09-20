@@ -16,17 +16,11 @@
   grainContext.putImageData(grainPixels,0,0);
   document.body.style.setProperty('--grain-image',`url("${grain.toDataURL()}")`);
   const canvas = document.querySelector('#silk-background');
-  const control = document.querySelector('#background-motion');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const contrast = matchMedia('(prefers-contrast: more)');
-  let enabled = !reduced.matches;
-  try { enabled = localStorage.getItem('jaeha.background-motion') !== 'off' && !reduced.matches; } catch {}
   const gl = canvas.getContext('webgl', {alpha:false, antialias:false, depth:false, powerPreference:'low-power'});
   const unavailable = () => {
     canvas.hidden = true;
-    control.disabled = true;
-    control.setAttribute('aria-label', 'Animated background unavailable');
-    control.title = 'Animated background unavailable';
   };
   if (!gl) { unavailable(); return; }
   const vertex = `attribute vec2 position;
@@ -95,7 +89,7 @@
   const uniforms=Object.fromEntries(['time','dark','aspect','pointer'].map(name=>[name,gl.getUniformLocation(program,name)]));
   const pointer={x:.5,y:.5,strength:0,targetX:.5,targetY:.5,targetStrength:0};
   let frame=0, elapsed=12, previous=0, lost=false;
-  const shouldAnimate=()=>enabled&&!reduced.matches&&!contrast.matches&&!document.hidden&&!lost;
+  const shouldAnimate=()=>!reduced.matches&&!contrast.matches&&!document.hidden&&!lost;
   const draw=()=>{
     if(lost)return;
     canvas.hidden=contrast.matches;
@@ -121,13 +115,6 @@
   };
   const refresh=()=>{
     cancelAnimationFrame(frame);frame=0;previous=performance.now();
-    const active=enabled&&!reduced.matches&&!contrast.matches;
-    control.disabled=reduced.matches||contrast.matches;
-    control.setAttribute('aria-pressed',String(active));
-    const label=control.disabled?'Background motion disabled by accessibility settings':active?'Pause background animation':'Play background animation';
-    control.title=label;control.setAttribute('aria-label',label);
-    control.innerHTML=`<i data-lucide="${active?'pause':'play'}" aria-hidden="true"></i>`;
-    lucide.createIcons({attrs:{'stroke-width':1.6}});
     draw();if(shouldAnimate())frame=requestAnimationFrame(tick);
   };
   const resize=()=>{
@@ -136,11 +123,6 @@
     canvas.height=Math.max(1,Math.round(innerHeight*scale));
     gl.viewport(0,0,canvas.width,canvas.height);draw();
   };
-  control.addEventListener('click',()=>{
-    enabled=!enabled;
-    try{localStorage.setItem('jaeha.background-motion',enabled?'on':'off')}catch{}
-    refresh();
-  });
   addEventListener('resize',resize,{passive:true});
   addEventListener('pointermove',event=>{
     if(event.pointerType==='touch'||!shouldAnimate())return;
