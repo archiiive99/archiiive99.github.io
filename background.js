@@ -36,10 +36,16 @@
     uniform float time;
     uniform float dark;
     uniform float aspect;
+    uniform vec3 pointer;
     void main(){
       vec2 uv=vUv;
       uv.x=(uv.x-.5)*min(aspect,1.8)+.5;
-      float t=time*.085;
+      vec2 cursor=vec2((pointer.x-.5)*min(aspect,1.8)+.5,pointer.y);
+      vec2 offset=uv-cursor;
+      float influence=exp(-dot(offset,offset)*4.)*pointer.z;
+      uv+=offset*.10*influence;
+      uv+=(cursor-vec2(.5))*.018*pointer.z;
+      float t=time*.18;
       float curtains=0.;
       for(int i=0;i<3;i++){
         float layer=float(i);
@@ -55,9 +61,9 @@
         curtains+=(ribbon*.7+veil*.3)*pleats;
       }
       float edge=smoothstep(.08,.55,abs(vUv.x-.5));
-      float strength=mix(.48,1.,edge);
-      float lightShade=.955-curtains*.12*strength;
-      float darkShade=.075+curtains*.15*strength;
+      float strength=mix(.64,1.,edge);
+      float lightShade=.955-curtains*.20*strength;
+      float darkShade=.075+curtains*.25*strength;
       gl_FragColor=vec4(vec3(mix(lightShade,darkShade,dark)),1.);
     }`;
   const shaders = [];
@@ -86,7 +92,8 @@
   gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
   const position=gl.getAttribLocation(program,'position');
   gl.enableVertexAttribArray(position);gl.vertexAttribPointer(position,2,gl.FLOAT,false,0,0);
-  const uniforms=Object.fromEntries(['time','dark','aspect'].map(name=>[name,gl.getUniformLocation(program,name)]));
+  const uniforms=Object.fromEntries(['time','dark','aspect','pointer'].map(name=>[name,gl.getUniformLocation(program,name)]));
+  const pointer={x:.5,y:.5,strength:0,targetX:.5,targetY:.5,targetStrength:0};
   let frame=0, elapsed=12, previous=0, lost=false;
   const shouldAnimate=()=>enabled&&!reduced.matches&&!contrast.matches&&!document.hidden&&!lost;
   const draw=()=>{
@@ -95,13 +102,21 @@
     gl.uniform1f(uniforms.time,elapsed);
     gl.uniform1f(uniforms.dark,document.documentElement.dataset.theme==='dark'?1:0);
     gl.uniform1f(uniforms.aspect,innerWidth/innerHeight);
+    gl.uniform3f(uniforms.pointer,pointer.x,pointer.y,pointer.strength);
     gl.drawArrays(gl.TRIANGLES,0,6);
   };
   const tick=now=>{
     frame=0;
     if(!shouldAnimate())return;
     // 30 fps and a bounded pixel budget keep the ambient layer inexpensive.
-    if(now-previous>=1000/30){elapsed+=Math.min((now-previous)/1000,.08);previous=now;draw();}
+    if(now-previous>=1000/30){
+      const dt=Math.min((now-previous)/1000,.08);
+      const follow=1-Math.exp(-dt/ .24);
+      pointer.x+=(pointer.targetX-pointer.x)*follow;
+      pointer.y+=(pointer.targetY-pointer.y)*follow;
+      pointer.strength+=(pointer.targetStrength-pointer.strength)*follow;
+      elapsed+=dt;previous=now;draw();
+    }
     frame=requestAnimationFrame(tick);
   };
   const refresh=()=>{
@@ -127,6 +142,15 @@
     refresh();
   });
   addEventListener('resize',resize,{passive:true});
+  addEventListener('pointermove',event=>{
+    if(event.pointerType==='touch'||!shouldAnimate())return;
+    pointer.targetX=Math.max(0,Math.min(1,event.clientX/innerWidth));
+    pointer.targetY=1-Math.max(0,Math.min(1,event.clientY/innerHeight));
+    pointer.targetStrength=1;
+  },{passive:true});
+  const releasePointer=()=>{pointer.targetStrength=0};
+  document.documentElement.addEventListener('pointerleave',releasePointer);
+  addEventListener('blur',releasePointer);
   document.addEventListener('visibilitychange',refresh);
   reduced.addEventListener('change',refresh);
   contrast.addEventListener('change',refresh);

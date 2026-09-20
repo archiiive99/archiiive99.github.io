@@ -11,7 +11,7 @@ const publications = [
 // All content is maintained locally, not supplied by runtime HTML or a remote API.
 const escapeHTML = value => value.replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const icon = name => `<i data-lucide="${name}" aria-hidden="true"></i>`;
-const renderAuthors = authors => authors.split(', ').map(name => `<span class="author-name">${name === 'Jaeha Song' ? `<strong>${escapeHTML(name)}</strong>` : escapeHTML(name)}</span>`).join(', ');
+const renderAuthors = authors => authors.split(', ').map((name,index,names) => `<span class="author-name">${name === 'Jaeha Song' ? `<strong>${escapeHTML(name)}</strong>` : escapeHTML(name)}${index < names.length-1 ? ',' : ''}</span>`).join(' ');
 function venueBadge(p) {
   const label=p.type==='review'||/20\d{2}/.test(p.venue)?p.venue:`${p.venue} ${p.year}`;
   const family=p.type==='review'?'review':p.venue.startsWith('ICLR')?'iclr':p.venue.startsWith('ICPR')?'icpr':'academic';
