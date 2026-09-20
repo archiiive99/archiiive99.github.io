@@ -139,14 +139,24 @@ h1 span { display: inline-block; font-size: 18px; color: var(--muted); font-weig
 .project-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; }
 .project-meta > span:first-child { font-size: 16px; font-weight: 400; color: var(--fg); }
 .industry-project h3 { max-width: 660px; font-size: 21px; }
-.award-row { display: grid; grid-template-columns: minmax(0,1fr) 160px; column-gap: 24px; }
-.award-row .project-meta { grid-column: 1 / -1; }
-.award-row h3, .award-row > p { grid-column: 1; }
-.award-thumbnail { grid-column: 2; grid-row: 2 / span 2; width: 160px; height: 120px; padding: 4px; border: 1px solid var(--line); border-radius: 4px; background: white; }
+.award-row { display: grid; grid-template-columns: minmax(0,1fr) 160px; gap: 24px; align-items: start; border-left: 2px solid var(--line); padding: 4px 0 4px 26px; }
+.award-row + .award-row { margin-top: 32px; }
+.award-copy { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.award-venue { color: var(--fg); font-size: 16px; line-height: 1.7; }
+.award-copy h3 { font-size: 21px; }
+.award-description { color: var(--secondary); line-height: 1.75; max-width: 65ch; }
+.award-media { display: grid; justify-items: end; gap: 8px; }
+.award-media .period { line-height: 27.2px; }
+.award-thumbnail { width: 160px; height: 120px; padding: 4px; border: 1px solid var(--line); border-radius: 4px; background: white; }
 .award-thumbnail img { display: block; width: 100%; height: 100%; object-fit: contain; }
 @media (max-width: 540px) {
-  .award-row { grid-template-columns: minmax(0,1fr) 96px; column-gap: 12px; }
-  .award-thumbnail { width: 96px; height: 84px; }
+  .award-row { grid-template-columns: minmax(0,1fr) 96px; gap: 8px 12px; }
+  .award-copy, .award-media { display: contents; }
+  .award-venue { grid-column: 1; grid-row: 1; }
+  .award-copy h3 { grid-column: 1; grid-row: 2; }
+  .award-description { grid-column: 1 / -1; grid-row: 3; }
+  .award-media .period { grid-column: 2; grid-row: 1; justify-self: end; }
+  .award-thumbnail { grid-column: 2; grid-row: 2; width: 96px; height: 84px; }
 }
 .project-details { display: flex; flex-wrap: wrap; gap: 20px 64px; margin: 24px 0 0; font-size: 16px; }
 .project-details dt { color: var(--muted); font-size: 14px; }
