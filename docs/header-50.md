@@ -62,6 +62,7 @@ Root causes: theme targets were 36 x 40px; the generic `.button` padding overrod
 - Icon centering, theme lens position, navigation lens position: 0px error.
 - Navigation center: 0px deviation from viewport center. No group collisions or horizontal overflow.
 - Arrow/Home/End, filter persistence, invalid saved filter fallback, scroll selection and bottom-of-document selection passed.
+- A regression test caught the filter track resizing when bold selection changed. Fixed with a 258px three-column grid; before/after selection dimensions now match exactly.
 - Empty 3:4 portrait and grayscale materials retained. No domestic papers reintroduced.
 - News copy now explicitly says RSD-BEV was accepted to ICPR 2026; August remains the existing news-entry date, not a verified acceptance-notification date.
 - Safari/iPhone hardware verification is not claimed.
