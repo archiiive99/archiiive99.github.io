@@ -53,12 +53,12 @@
         sin(p.y*1.25+t*.7)+.45*cos(p.x*1.7-t*.45),
         sin(p.x*1.15-t*.65)+.40*cos(p.y*1.6+t*.5));
       vec2 flow=p+bend*.8;
-      float phase=flow.y*3.5+flow.x*.65
-        +1.1*sin(flow.x*1.5+t*.55)-t;
+      float phase=flow.y*6.2+flow.x*.85
+        +1.1*sin(flow.x*1.5+t*.55)-t*1.5;
       float wave=.5+.5*sin(phase);
-      float crest=smoothstep(.32,.95,wave);
+      float crest=smoothstep(.70,.99,wave);
       float fold=.5+.5*sin(phase+.65+.3*sin(flow.y-t*.4));
-      float curtains=crest*.80+fold*.20;
+      float curtains=crest*.93+fold*.07;
       float edge=smoothstep(.08,.55,abs(vUv.x-.5));
       float strength=mix(.64,1.,edge);
       float lightShade=.965-curtains*.22*strength;

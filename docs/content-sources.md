@@ -37,6 +37,8 @@
 
 ## Asset attribution
 
+- `assets/paver-demo.webp`: https://github.com/archiiive99/PAVER/blob/main/assets/vad_tiny_gradcam_demo.webp ; original 40,284,438-byte file, 1200x506, WebP ANIM loop count 0 (infinite). Replaces the static PAVER overview thumbnail; lazily loaded.
+
 - Compact publication thumbnails are first-page renders of actual papers, not generated illustrations: Waymo official Swin-Trajectory report; arXiv 2408.00347 (BMVC); YMJ DOI 10.3349/ymj.2023.0091; ICAIIC official program PDFs 1571107040 (occupancy) and 1571107345 (mapping) from manuscriptlink/di0zxmb8pwajl.cloudfront.net.
 - RSD-BEV official paper: https://doi.org/10.1007/978-3-032-31438-3_21 . Full PDF requires access; its thumbnail remains pending a supplied manuscript/figure. Do not substitute an unrelated diagram or book cover.
 - All publication fallback links to lab profiles have been removed. Paper buttons point to actual papers/publisher records only.
