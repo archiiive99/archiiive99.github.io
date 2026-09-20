@@ -81,6 +81,10 @@ Public Notion detail pages verified for one-sentence contribution descriptions:
 
 ## Final Review Updates
 
+- Introduction: current Ph.D. student, prior RideFlux internship, and undergraduate medical imaging research; kept as one paragraph. RideFlux links to its official English website, https://rideflux.com/eng/.
+- ICIP award photograph found in the public Virtual Docent project, https://archiiive.notion.site/2a6332bb4dff810c86a7d23d47973a3c (image block 2a6332bb-4dff-812f-85fd-fa7a7c716700). The photograph shows the December 15, 2023 winter ICIP & Capstone Design event banner and first-prize award. Stored as `assets/award-icip.jpg`, with click-to-enlarge behavior matching other awards. The generic trophy cover on the Awards page is not used.
+- Institution logos remain omitted at the owner's request. Portrait-to-introduction column gaps reduced by half across breakpoints; portrait aspect ratio remains 3:4.
+
 - Education/Awards reuse project row markup and styling; Ph.D. Student is used, not Candidate.
 - Swin-Trajectory first three authors and both ICAIIC papers first two authors have equal-contribution marks, verified against the source PDFs.
 - RSD-BEV News links to its DOI. ICPR official accepted-paper list also links to the Springer PDF route, but that route returns the subscription HTML page, not a downloadable PDF. No authenticated access was bypassed; main figure remains pending.
