@@ -142,7 +142,7 @@ const sizePortrait=()=>{
   const textHeight=identity.getBoundingClientRect().height+
     (innerWidth>800?story.getBoundingClientRect().height+parseFloat(getComputedStyle(intro).rowGap):0);
   portrait.style.setProperty('--portrait-aspect',`${ratio}`);
-  portrait.style.setProperty('--portrait-width',`${textHeight*ratio}px`);
+  portrait.style.setProperty('--portrait-width',`${textHeight*ratio*1.2}px`);
 };
 portraitImage.addEventListener('load',sizePortrait);
 const portraitObserver=new ResizeObserver(sizePortrait);
