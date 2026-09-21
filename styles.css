@@ -3,7 +3,7 @@
   --bg: #f3f3f3; --fg: #202020; --secondary: #3f3f3f; --muted: #595959;
   --line: rgb(0 0 0 / .15); --accent: #245676; --track: rgb(0 0 0 / .055); --thumb: rgb(255 255 255 / .82);
   --reading-surface: rgb(255 255 255 / .48);
-  --venue-opacity: .2;
+  --venue-opacity: .12;
   --venue-tint: 0 0 0;
   color-scheme: light;
 }
