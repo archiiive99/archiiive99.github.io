@@ -114,8 +114,8 @@ h1 span { display: inline-block; font-size: 18px; color: var(--muted); font-weig
 .featured .pub-body { padding-top: 22px; display: flex; flex-direction: column; flex: 1; }
 .pub-meta { margin-bottom: 13px; }
 .venue { display: inline-flex; align-items: center; width: fit-content; max-width: 100%; padding: 7px 12px; font-size: 13px; font-weight: 600; line-height: 1.35; border-radius: 999px; border: 1px solid var(--line); background: var(--track); color: var(--secondary); }
-.venue-iclr { color: #275444; background: rgb(55 115 88 / .065); border-color: rgb(55 115 88 / .18); }
-.venue-icpr { color: #4f4479; background: rgb(98 76 148 / .055); border-color: rgb(98 76 148 / .18); }
+.venue-iclr { color: #275444; background: rgb(55 115 88 / .05); border-color: rgb(55 115 88 / .18); }
+.venue-icpr { color: #4f4479; background: rgb(98 76 148 / .04); border-color: rgb(98 76 148 / .18); }
 .venue-cvpr { color: #215e7c; background: rgb(37 123 163 / .09); border-color: rgb(37 123 163 / .25); }
 .venue-review { color: #82592b; background: rgb(149 106 52 / .06); border-color: rgb(149 106 52 / .2); }
 [data-theme="dark"] .venue-iclr { color: #adcfbe; }
