@@ -81,6 +81,8 @@ Public Notion detail pages verified for one-sentence contribution descriptions:
 
 ## Final Review Updates
 
+- Latest portrait replacement: owner reuploaded `inbox/jaeha_song_profile.png` (87,323,549 bytes, 3200x4800, 16-bit sRGB with ICC). The original stays in the ignored inbox. The site and social/structured-data image references now use `assets/jaeha-song-profile-v2.webp`: full 3200x4800, ICC retained, converted to 8-bit and then losslessly WebP-encoded. No crop or resize; this is not claimed to be bit-identical to the 16-bit original. The older PNG is retained but no longer referenced by the homepage.
+
 - Current order: News, Experience, Publications, Awards, Education, Projects, Languages. Each section has its own matching navigation anchor. The duplicate header name is removed; the main name and back-to-top control remain. Narrow navigation scrolls horizontally and follows the active section.
 - Portrait remains enlarged and rounded; horizontal spacing restored to the prior 32/20/14/10px breakpoint values at the owner's request.
 - Experience organization links: RideFlux https://rideflux.com/eng/, IRCV https://ircv.hanyang.ac.kr/, Dongguk Machine Learning Lab https://www.ml.dongguk.edu/ (official People page lists Jihie Kim).
