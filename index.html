@@ -54,11 +54,11 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=1">
   <link rel="icon" type="image/svg+xml" sizes="any" href="assets/favicon.svg?v=1">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png?v=1">
-  <link rel="stylesheet" href="styles.css?v=37">
+  <link rel="stylesheet" href="styles.css?v=38">
   <link rel="stylesheet" href="glass.css?v=10">
   <script>try{document.documentElement.dataset.theme=localStorage.getItem('jaeha.theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{}</script>
   <script src="assets/lucide.min.js" defer></script>
-  <script src="app.js?v=23" defer></script>
+  <script src="app.js?v=24" defer></script>
   <script src="optics.js?v=10" defer></script>
   <script src="background.js?v=16" defer></script>
 </head>
@@ -68,7 +68,7 @@
 <header class="site-header">
   <div class="nav-inner">
     <nav aria-label="Main navigation"><a href="#news">News</a><a href="#experience">Experience</a><a href="#research">Publications</a><a href="#awards">Awards</a><a href="#education">Education</a><a href="#projects">Projects</a><a href="#certifications">Languages</a></nav>
-    <div class="appearance-controls"><div class="segmented theme-control" role="group" aria-label="Color theme"><button type="button" data-theme-choice="light" aria-pressed="true" aria-label="Light theme" title="Light theme"><i data-lucide="sun" aria-hidden="true"></i></button><button type="button" data-theme-choice="dark" aria-pressed="false" aria-label="Dark theme" title="Dark theme"><i data-lucide="moon" aria-hidden="true"></i></button></div></div>
+    <div class="appearance-controls"><button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><i data-lucide="moon" class="theme-icon-moon" aria-hidden="true"></i><i data-lucide="sun" class="theme-icon-sun" aria-hidden="true"></i></button></div>
   </div>
 </header>
 <main id="main">
@@ -76,8 +76,8 @@
     <div class="portrait-slot"><img src="assets/jaeha-song-profile.png" alt="Jaeha Song" width="3200" height="4800" fetchpriority="high" decoding="async"></div>
     <div class="identity">
     <h1 id="name">Jaeha Song</h1>
-    <p class="affiliation"><a href="https://ircv.hanyang.ac.kr/">IRCV Lab · Hanyang University</a><br>Seoul, Korea</p>
-    <div class="contact-links"><a class="button primary" href="mailto:archiiive99@gmail.com"><i data-lucide="mail" aria-hidden="true"></i>Email</a><a class="button" href="https://github.com/archiiive99"><i data-lucide="github" aria-hidden="true"></i>GitHub</a><a class="button" href="https://www.linkedin.com/in/archiiive99/"><i data-lucide="linkedin" aria-hidden="true"></i>LinkedIn</a></div>
+    <p class="affiliation"><a href="https://ircv.hanyang.ac.kr/"><span>IRCV Lab</span><span class="affiliation-divider"> · </span><span>Hanyang University</span></a><br>Seoul, Korea</p>
+    <div class="contact-links"><a class="button primary" href="mailto:archiiive99@gmail.com" aria-label="Email" title="Email"><i data-lucide="mail" aria-hidden="true"></i><span class="contact-label">Email</span></a><a class="button" href="https://github.com/archiiive99" aria-label="GitHub" title="GitHub"><i data-lucide="github" aria-hidden="true"></i><span class="contact-label">GitHub</span></a><a class="button" href="https://www.linkedin.com/in/archiiive99/" aria-label="LinkedIn" title="LinkedIn"><i data-lucide="linkedin" aria-hidden="true"></i><span class="contact-label">LinkedIn</span></a></div>
     </div>
     <div class="intro-story">
     <p class="bio">I am a Ph.D. student working with <a href="https://soonminhwang.github.io/">Prof. Soonmin Hwang</a> on representation learning for autonomous driving. I started my doctoral studies in September 2026, after receiving my B.S. in Computer Engineering from Dongguk University and my M.S. in Automotive Engineering from Hanyang University. Previously, I interned with the VVSW &amp; Perception Unit at <a href="https://rideflux.com/eng/">RideFlux</a>, working on ML-based planning, scenario tagging, and MLOps. During my undergraduate studies, I conducted medical imaging research. My research interests include <strong>End-to-End Autonomous Driving</strong>, <strong>Closed-loop Evaluation</strong>, <strong>3D Gaussian Splatting</strong>, and <strong>Planning-aligned Pretraining</strong>.</p>

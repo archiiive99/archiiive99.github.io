@@ -64,11 +64,18 @@ for(const button of document.querySelectorAll('[data-filter]')) button.addEventL
 });
 function setTheme(theme){
   document.documentElement.dataset.theme=theme;
-  document.querySelectorAll('[data-theme-choice]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeChoice===theme)));
+  const toggle=document.querySelector('.theme-toggle');
+  const label=theme==='dark'?'Switch to light mode':'Switch to dark mode';
+  toggle.setAttribute('aria-label',label);
+  toggle.title=label;
   document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#161616':'#f3f3f3';
 }
 setTheme(document.documentElement.dataset.theme);
-for(const button of document.querySelectorAll('[data-theme-choice]'))button.addEventListener('click',()=>{setTheme(button.dataset.themeChoice);try{localStorage.setItem('jaeha.theme',button.dataset.themeChoice)}catch{}});
+document.querySelector('.theme-toggle').addEventListener('click',()=>{
+  const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';
+  setTheme(theme);
+  try{localStorage.setItem('jaeha.theme',theme)}catch{}
+});
 
 // Lens boxes follow controls, including changes to the font or viewport.
 function createLens(group,selector){

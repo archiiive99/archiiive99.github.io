@@ -66,3 +66,10 @@ Static monochrome film grain is generated once as a small bitmap tile. It sits a
 - Projects has no collaboration/type eyebrow or separate Project type / My focus fields; describe the work directly.
 - Remove full-width translucent section backgrounds. The animated page background must remain continuous through Education, Awards and the footer.
 - Additional project records and compact right-side publication thumbnails remain pending source verification; do not invent missing content.
+# Mobile Profile and Media Update (2026-09-21)
+
+- Mobile portrait columns use 154px on phones, 139px on narrow phones, and 220px on tablets, retaining the original 2:3 image without a crop.
+- Contact links keep accessible names and titles while showing only 44px icon buttons below 800px.
+- Mobile publication thumbnails are above their text, matching the featured layout. Existing missing-image entries remain text-only; no substitute research figure is invented.
+- Mobile awards use large contained photos followed by year and award text. Desktop retains side thumbnails and the two featured publications.
+- A single theme action is shared by desktop and mobile: moon switches light to dark, sun switches dark to light. Local storage persistence remains enabled.
