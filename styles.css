@@ -101,6 +101,7 @@ h1 span { display: inline-block; font-size: 18px; color: var(--muted); font-weig
 .figure-dialog { width: min(1200px,94vw); max-height: 90dvh; padding: 48px 18px 18px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg); }
 .figure-dialog::backdrop { background: rgb(0 0 0 / .6); backdrop-filter: blur(6px); }
 .figure-dialog img { display: block; width: 100%; max-height: calc(90dvh - 80px); object-fit: contain; }
+.figure-dialog img[src$="rsd-bev-overview.png"] { background: #fff; }
 .figure-close { position: absolute; top: 4px; right: 4px; width: 40px; height: 40px; display: grid; place-items: center; border: 0; border-radius: 50%; background: var(--track); color: var(--fg); }
 .pub-links:empty { display: none; }
 @media (max-width: 540px) {

@@ -10,6 +10,10 @@ These additions neither guarantee indexing nor control Google's timetable.
 
 Owner action:
 
+The owner supplied an HTML verification tag on 2026-09-21; it is now included in
+the homepage head. The owner still needs to press Verify in Search Console.
+Publishing the tag does not itself complete Google account verification.
+
 1. Open https://search.google.com/search-console/.
 2. Add the URL-prefix property `https://archiiive99.github.io/`.
 3. Verify ownership using Google's HTML file or meta tag. Add the exact provided

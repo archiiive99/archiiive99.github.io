@@ -47,7 +47,7 @@
 
 - Current background supersedes earlier wave experiments: adapted from React Bits LiquidChrome.jsx (David Haz), https://github.com/DavidHDev/react-bits/tree/main/src/content/Backgrounds/LiquidChrome . Existing MIT + Commons Clause notice applies. Retain its iterative coordinate distortion and cursor ripple with grayscale theme remapping, speed 0.16, smoothed pointer and existing CSS blur. Ferrofluid was investigated but not deployed.
 
-- Main-figure thumbnails supersede the first-page previews: Swin-Trajectory Fig. 1 (PDF page 2), ICAIIC occupancy Fig. 1 (page 2), ICAIIC mapping Fig. 1 (page 2), BMVC DTS Fig. 2 (page 4), YMJ Fig. 1 (page 3). Extracted directly with pdftoppm at 2400px page resolution, excluding captions/body text; no generated or redrawn scientific content. PAVER and SGLDet are unchanged. RSD-BEV manuscript/figure is still unavailable.
+- Main-figure thumbnails supersede the first-page previews: Swin-Trajectory Fig. 1 (PDF page 2), ICAIIC occupancy Fig. 1 (page 2), ICAIIC mapping Fig. 1 (page 2), BMVC DTS Fig. 2 (page 4), YMJ Fig. 1 (page 3). Extracted directly with pdftoppm at 2400px page resolution, excluding captions/body text; no generated or redrawn scientific content. PAVER and SGLDet are unchanged. RSD-BEV now uses the original overview supplied by the owner on 2026-09-21 (`assets/rsd-bev-overview.png`).
 
 ## Project Contribution Verification (2026-09-21)
 
@@ -67,7 +67,7 @@ Public Notion detail pages verified for one-sentence contribution descriptions:
 - `assets/paver-demo.webp`: https://github.com/archiiive99/PAVER/blob/main/assets/vad_tiny_gradcam_demo.webp ; original 40,284,438-byte file, 1200x506, WebP ANIM loop count 0 (infinite). Replaces the static PAVER overview thumbnail; lazily loaded.
 
 - Original first-page preview files are retained but unused; the live site displays extracted main figures.
-- RSD-BEV official paper: https://doi.org/10.1007/978-3-032-31438-3_21 . Full PDF requires access; its thumbnail remains pending a supplied manuscript/figure. Do not substitute an unrelated diagram or book cover.
+- RSD-BEV official paper: https://doi.org/10.1007/978-3-032-31438-3_21 . Full PDF requires access; its thumbnail now uses the owner-supplied original figure. Do not substitute an unrelated diagram or book cover.
 - All publication fallback links to lab profiles have been removed. Paper buttons point to actual papers/publisher records only.
 - Historical Chroma Waves-inspired implementation was replaced by Liquid Chrome; no Pro source code was used.
 
@@ -95,7 +95,7 @@ Public Notion detail pages verified for one-sentence contribution descriptions:
 
 - Education/Awards reuse project row markup and styling; Ph.D. Student is used, not Candidate.
 - Swin-Trajectory first three authors and both ICAIIC papers first two authors have equal-contribution marks, verified against the source PDFs.
-- RSD-BEV News links to its DOI. ICPR official accepted-paper list also links to the Springer PDF route, but that route returns the subscription HTML page, not a downloadable PDF. No authenticated access was bypassed; main figure remains pending.
+- RSD-BEV News links to its DOI. ICPR official accepted-paper list also links to the Springer PDF route, but that route returns the subscription HTML page, not a downloadable PDF. No authenticated access was bypassed; the owner subsequently supplied the main figure, now published unchanged.
 - PAVER playback uses a 16,355,983-byte H.264 MP4 retaining all 1,163 frames, 1200x506 pixels and 96.916 seconds. Original WebP retained. Video loads on intersection, pauses offscreen and follows reduced-motion preferences.
 - Main figures open in a keyboard-dismissible modal. Navigation clears its active state in Education/Awards/Languages.
 - News includes June 2025 Waymo 3rd place; user date corroborated by the official June technical report and earlier source records.

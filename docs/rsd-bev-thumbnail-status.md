@@ -1,13 +1,16 @@
-# RSD-BEV Thumbnail: Source Required
+# RSD-BEV Thumbnail: Completed
 
-Status as of 2026-09-21: not implemented. Do not claim completion or substitute
-an illustration from another paper.
+Completed on 2026-09-21 after the owner uploaded `inbox/icpr2026_overview.png`.
+The original 4363x2497 transparent PNG is preserved byte-for-byte as
+`assets/rsd-bev-overview.png` and used by the RSD-BEV publication entry.
+Desktop side thumbnail, mobile top thumbnail, and click-to-enlarge are enabled.
+The enlargement has a white background so black labels remain legible in dark mode.
 
 Exact paper: RSD-BEV: Residual Self-Distillation Framework for Efficient BEV
 Representation Learning, Sungjin Park, Jaeha Song, Soonmin Hwang, ICPR 2026.
 DOI: https://doi.org/10.1007/978-3-032-31438-3_21
 
-## Verified Sources
+## Earlier Source Search
 
 - Springer chapter page exposes the abstract but states that the full chapter
   is subscription content. Earlier PDF download returned HTML, not a PDF.
@@ -22,7 +25,7 @@ DOI: https://doi.org/10.1007/978-3-032-31438-3_21
   `/home/song99/ws` to depth 8 found no matching ICPR or self-distillation PDF.
   Files with unrelated names or in other locations have not been ruled out.
 
-## Required Input
+## Original Handoff (Resolved)
 
 Ask the owner for the paper PDF or original main figure, uploaded to
 `/home/song99/ws/archiiive99.github.io/inbox/`. That folder is ignored by Git.
