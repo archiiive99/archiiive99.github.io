@@ -17,7 +17,7 @@ function venueBadge(p) {
   const family=p.type==='review'?'review':p.venue.startsWith('ICLR')?'iclr':p.venue.startsWith('ICPR')?'icpr':p.venue.startsWith('CVPR')?'cvpr':'academic';
   return `<span class="venue venue-${family}">${escapeHTML(label)}</span>`;
 }
-document.querySelector('#publications').innerHTML = publications.map(p => `<article class="publication ${p.image?'featured':p.thumbnail?'with-thumbnail':''}" data-year="${p.year}">${p.image?`<a class="pub-visual" href="${p.links.find(([name])=>name==='Project')[1]}" aria-label="${escapeHTML(p.title)} project">${p.video?`<video data-src="${p.video}" muted loop playsinline preload="none" poster="assets/paver.png" aria-label="${escapeHTML(p.alt)}" width="1200" height="506"></video>`:`<img src="${p.image}" alt="${escapeHTML(p.alt)}" loading="lazy" width="960" height="350">`}<span class="figure-link">${icon('arrow-up-right')}</span></a>`:''}<div class="pub-body"><div class="pub-meta">${venueBadge(p)}</div><h3>${escapeHTML(p.title)}</h3><p class="authors">${renderAuthors(p.authors)}</p>${p.description?`<p class="pub-description">${escapeHTML(p.description).replace(/^3rd place/, '<strong class="result-highlight">3rd place</strong>')}</p>`:''}<div class="pub-links">${p.links.map(([name,url])=>`<a href="${url}">${icon(name==='Code'?'github':name==='Paper'?'file-text':'arrow-up-right')}${name}</a>`).join('')}</div></div>${p.thumbnail?`<button class="pub-thumbnail" type="button" data-figure="${p.thumbnail}" data-title="${escapeHTML(p.title)}" aria-label="Enlarge figure: ${escapeHTML(p.title)}"><img src="${p.thumbnail}" alt="Main figure from ${escapeHTML(p.title)}" loading="lazy" width="1200" height="700"></button>`:''}</article>`).join('');
+document.querySelector('#publications').innerHTML = publications.map(p => `<article class="publication ${p.image?'featured':p.thumbnail?'with-thumbnail':''}" data-year="${p.year}">${p.image?`<a class="pub-visual" href="${p.links.find(([name])=>name==='Project')[1]}" aria-label="${escapeHTML(p.title)} project">${p.video?`<video data-src="${p.video}" muted loop playsinline disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback" preload="none" poster="assets/paver.png" aria-label="${escapeHTML(p.alt)}" width="1200" height="506"></video>`:`<img src="${p.image}" alt="${escapeHTML(p.alt)}" loading="lazy" width="960" height="350">`}<span class="figure-link">${icon('arrow-up-right')}</span></a>`:''}<div class="pub-body"><div class="pub-meta">${venueBadge(p)}</div><h3>${escapeHTML(p.title)}</h3><p class="authors">${renderAuthors(p.authors)}</p>${p.description?`<p class="pub-description">${escapeHTML(p.description).replace(/^3rd place/, '<strong class="result-highlight">3rd place</strong>')}</p>`:''}<div class="pub-links">${p.links.map(([name,url])=>`<a href="${url}">${icon(name==='Code'?'github':name==='Paper'?'file-text':'arrow-up-right')}${name}</a>`).join('')}</div></div>${p.thumbnail?`<button class="pub-thumbnail" type="button" data-figure="${p.thumbnail}" data-title="${escapeHTML(p.title)}" aria-label="Enlarge figure: ${escapeHTML(p.title)}"><img src="${p.thumbnail}" alt="Main figure from ${escapeHTML(p.title)}" loading="lazy" width="1200" height="700"></button>`:''}</article>`).join('');
 lucide.createIcons({attrs:{'stroke-width':1.6}});
 
 const figureDialog=document.createElement('dialog');
@@ -36,11 +36,29 @@ document.querySelectorAll('[data-figure]').forEach(button=>button.addEventListen
 
 const motionPreference=matchMedia('(prefers-reduced-motion: reduce)');
 const previewVideos=[...document.querySelectorAll('.pub-visual video')];
+const previewPosters=new Map(previewVideos.map(video=>{
+  video.controls=false;
+  video.muted=true;
+  const poster=document.createElement('img');
+  poster.src=video.poster;
+  poster.alt=video.getAttribute('aria-label') || '';
+  poster.className='preview-poster';
+  poster.hidden=true;
+  video.before(poster);
+  return [video,poster];
+}));
 const visibleVideos=new Set();
 const updatePreviews=()=>previewVideos.forEach(video=>{
   if(visibleVideos.has(video)&&!motionPreference.matches&&!document.hidden){
     if(!video.getAttribute('src'))video.src=video.dataset.src;
-    video.play().catch(()=>{video.controls=true});
+    video.play().then(()=>{
+      video.hidden=false;
+      previewPosters.get(video).hidden=true;
+    }).catch(error=>{
+      if(error.name==='AbortError')return;
+      video.hidden=true;
+      previewPosters.get(video).hidden=false;
+    });
   }else video.pause();
 });
 const previewObserver=new IntersectionObserver(entries=>{
@@ -50,18 +68,7 @@ const previewObserver=new IntersectionObserver(entries=>{
 previewVideos.forEach(video=>previewObserver.observe(video));
 motionPreference.addEventListener('change',updatePreviews);
 document.addEventListener('visibilitychange',updatePreviews);
-function setPublicationFilter(value){
-  const filter=['all','2026','earlier'].includes(value)?value:'all';
-  document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===filter)));
-  document.querySelectorAll('.publication').forEach(row=>row.hidden=filter==='2026'?row.dataset.year!=='2026':filter==='earlier'?row.dataset.year==='2026':false);
-}
-let savedFilter='all';
-try{savedFilter=localStorage.getItem('jaeha.publication-filter')}catch{}
-setPublicationFilter(savedFilter);
-for(const button of document.querySelectorAll('[data-filter]')) button.addEventListener('click',()=>{
-  setPublicationFilter(button.dataset.filter);
-  try{localStorage.setItem('jaeha.publication-filter',button.dataset.filter)}catch{}
-});
+try{localStorage.removeItem('jaeha.publication-filter')}catch{}
 function setTheme(theme){
   document.documentElement.dataset.theme=theme;
   const toggle=document.querySelector('.theme-toggle');
@@ -75,42 +82,6 @@ document.querySelector('.theme-toggle').addEventListener('click',()=>{
   const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';
   setTheme(theme);
   try{localStorage.setItem('jaeha.theme',theme)}catch{}
-});
-
-// Lens boxes follow controls, including changes to the font or viewport.
-function createLens(group,selector){
-  const lens=document.createElement('span');
-  lens.className='selection-lens';
-  lens.setAttribute('aria-hidden','true');
-  group.prepend(lens);
-  const position=()=>{
-    const active=group.querySelector(selector);
-    if(!active)return;
-    lens.style.width=`${active.offsetWidth}px`;
-    lens.style.height=`${active.offsetHeight}px`;
-    lens.style.transform=`translate(${active.offsetLeft}px,${active.offsetTop}px)`;
-  };
-  position();
-  requestAnimationFrame(()=>requestAnimationFrame(()=>group.classList.add('lens-ready')));
-  new ResizeObserver(position).observe(group);
-  document.fonts.ready.then(position);
-  return position;
-}
-document.querySelectorAll('.segmented').forEach(group=>{
-  const position=group.matches('.theme-control')?()=>{}:createLens(group,'[aria-pressed="true"]');
-  group.addEventListener('click',position);
-  group.addEventListener('keydown',event=>{
-    const buttons=[...group.querySelectorAll('button:not(:disabled)')];
-    const index=buttons.indexOf(document.activeElement);
-    if(index<0)return;
-    let next;
-    if(event.key==='ArrowRight')next=(index+1)%buttons.length;
-    else if(event.key==='ArrowLeft')next=(index+buttons.length-1)%buttons.length;
-    else if(event.key==='Home')next=0;
-    else if(event.key==='End')next=buttons.length-1;
-    else return;
-    event.preventDefault();buttons[next].focus({preventScroll:true});buttons[next].click();
-  });
 });
 
 const navigation=[...document.querySelectorAll('nav a')];
