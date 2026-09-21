@@ -110,13 +110,22 @@ const navigation=[...document.querySelectorAll('nav a')];
 const header=document.querySelector('.site-header');
 let headerOffset=112;
 const updateNavigation=()=>{
-  const active=[...navigation].reverse().find(a=>{
+  const atBottom=scrollY+innerHeight>=document.documentElement.scrollHeight-2;
+  const active=atBottom?navigation.at(-1):[...navigation].reverse().find(a=>{
     const section=document.querySelector(a.hash);
     const start=section.getBoundingClientRect().top;
     const end=section.nextElementSibling?.getBoundingClientRect().top??section.getBoundingClientRect().bottom;
     return start<=headerOffset+8&&end>headerOffset+8;
   });
   navigation.forEach(a=>{if(a===active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')});
+  if(active){
+    const nav=active.parentElement;
+    const bounds=nav.getBoundingClientRect();
+    const item=active.getBoundingClientRect();
+    if(item.left<bounds.left||item.right>bounds.right){
+      nav.scrollTo({left:nav.scrollLeft+item.left-bounds.left-(bounds.width-item.width)/2,behavior:'instant'});
+    }
+  }
 };
 let scrollFrame=0;
 addEventListener('scroll',()=>{

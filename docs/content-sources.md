@@ -81,6 +81,10 @@ Public Notion detail pages verified for one-sentence contribution descriptions:
 
 ## Final Review Updates
 
+- Current order: News, Experience, Publications, Awards, Education, Projects, Languages. Each section has its own matching navigation anchor. The duplicate header name is removed; the main name and back-to-top control remain. Narrow navigation scrolls horizontally and follows the active section.
+- Portrait remains enlarged and rounded; horizontal spacing restored to the prior 32/20/14/10px breakpoint values at the owner's request.
+- Experience organization links: RideFlux https://rideflux.com/eng/, IRCV https://ircv.hanyang.ac.kr/, Dongguk Machine Learning Lab https://www.ml.dongguk.edu/ (official People page lists Jihie Kim).
+
 - Owner-supplied portrait added on 2026-09-21 from `inbox/jaeha_song_profile.png`; published as `assets/jaeha-song-profile.png`, byte-identical to the original 3200x4800 PNG. The portrait now follows its intrinsic 2:3 ratio rather than the previous 3:4 placeholder. No crop, retouching, forced-height stretch or corner clipping; responsive sizing derives the ratio from the image. The upload inbox remains local and is ignored by Git.
 
 - Awards use an independent row template: venue, distinction and a short factual description form one text group with 8px spacing. Year and image occupy a separate aligned column; mobile descriptions span the row for readability. All four descriptions preserve existing award/project facts without adding competition rankings or unsupported scope.

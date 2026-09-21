@@ -11,11 +11,11 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://archiiive99.github.io/">
   <link rel="canonical" href="https://archiiive99.github.io/">
-  <link rel="stylesheet" href="styles.css?v=32">
+  <link rel="stylesheet" href="styles.css?v=33">
   <link rel="stylesheet" href="glass.css?v=10">
   <script>try{document.documentElement.dataset.theme=localStorage.getItem('jaeha.theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{}</script>
   <script src="assets/lucide.min.js" defer></script>
-  <script src="app.js?v=22" defer></script>
+  <script src="app.js?v=23" defer></script>
   <script src="optics.js?v=10" defer></script>
   <script src="background.js?v=16" defer></script>
 </head>
@@ -24,8 +24,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="nav-inner">
-    <a class="wordmark" href="#about" aria-label="Jaeha Song, home">Jaeha Song</a>
-    <nav aria-label="Main navigation"><a href="#experience">Experience</a><a href="#research">Publications</a><a href="#projects">Projects</a></nav>
+    <nav aria-label="Main navigation"><a href="#news">News</a><a href="#experience">Experience</a><a href="#research">Publications</a><a href="#awards">Awards</a><a href="#education">Education</a><a href="#projects">Projects</a><a href="#certifications">Languages</a></nav>
     <div class="appearance-controls"><div class="segmented theme-control" role="group" aria-label="Color theme"><button type="button" data-theme-choice="light" aria-pressed="true" aria-label="Light theme" title="Light theme"><i data-lucide="sun" aria-hidden="true"></i></button><button type="button" data-theme-choice="dark" aria-pressed="false" aria-label="Dark theme" title="Dark theme"><i data-lucide="moon" aria-hidden="true"></i></button></div></div>
   </div>
 </header>
@@ -41,7 +40,7 @@
     <p class="bio">I am a Ph.D. student working with <a href="https://soonminhwang.github.io/">Prof. Soonmin Hwang</a> on representation learning for autonomous driving. I started my doctoral studies in September 2026, after receiving my B.S. in Computer Engineering from Dongguk University and my M.S. in Automotive Engineering from Hanyang University. Previously, I interned with the VVSW &amp; Perception Unit at <a href="https://rideflux.com/eng/">RideFlux</a>, working on ML-based planning, scenario tagging, and MLOps. During my undergraduate studies, I conducted medical imaging research. My research interests include <strong>End-to-End Autonomous Driving</strong>, <strong>Closed-loop Evaluation</strong>, <strong>3D Gaussian Splatting</strong>, and <strong>Pretraining</strong>.</p>
     </div>
   </section>
-  <section class="updates" aria-labelledby="news-title">
+  <section class="updates" id="news" aria-labelledby="news-title">
     <h2 id="news-title">News</h2>
     <div class="news-list">
       <div><time datetime="2026-09">Sep 2026</time><p><a href="https://archiiive99.github.io/PAVER/">PAVER</a> preprint coming soon on arXiv.</p></div>
@@ -53,10 +52,10 @@
   <section id="experience" aria-labelledby="experience-title">
     <div class="section-heading"><h2 id="experience-title">Experience</h2></div>
     <div class="timeline">
-      <article><div class="period">Dec 2025 – Feb 2026</div><div><h3>Research internship</h3><p class="organization">RideFlux · VVSW &amp; Perception Unit</p><p>Worked on ML-based Planning, Scenario Tagging, and MLOps.</p></div></article>
-      <article><div class="period">From Sep 2024</div><div><h3>Graduate research</h3><p class="organization">IRCV Lab · Hanyang University</p><p>End-to-end autonomous driving, BEV perception, and 3D Gaussian Splatting. Advised by <a href="https://soonminhwang.github.io/">Prof. Soonmin Hwang</a>.</p></div></article>
-      <article><div class="period">Mar – Aug 2024</div><div><h3>Research internship</h3><p class="organization">IRCV Lab · Hanyang University</p><p>3D occupancy prediction and quantization.</p></div></article>
-      <article><div class="period">2023 – 2024</div><div><h3>Research internship</h3><p class="organization">Machine Learning Lab · Dongguk University</p><p>3D medical image segmentation. Advised by <a href="https://sites.google.com/view/jihiekim/">Prof. Jihie Kim</a>.</p></div></article>
+      <article><div class="period">Dec 2025 – Feb 2026</div><div><h3>Research internship</h3><p class="organization"><a href="https://rideflux.com/eng/">RideFlux</a> · VVSW &amp; Perception Unit</p><p>Worked on ML-based Planning, Scenario Tagging, and MLOps.</p></div></article>
+      <article><div class="period">From Sep 2024</div><div><h3>Graduate research</h3><p class="organization"><a href="https://ircv.hanyang.ac.kr/">IRCV Lab</a> · Hanyang University</p><p>End-to-end autonomous driving, BEV perception, and 3D Gaussian Splatting. Advised by <a href="https://soonminhwang.github.io/">Prof. Soonmin Hwang</a>.</p></div></article>
+      <article><div class="period">Mar – Aug 2024</div><div><h3>Research internship</h3><p class="organization"><a href="https://ircv.hanyang.ac.kr/">IRCV Lab</a> · Hanyang University</p><p>3D occupancy prediction and quantization.</p></div></article>
+      <article><div class="period">2023 – 2024</div><div><h3>Research internship</h3><p class="organization"><a href="https://www.ml.dongguk.edu/">Machine Learning Lab</a> · Dongguk University</p><p>3D medical image segmentation. Advised by <a href="https://sites.google.com/view/jihiekim/">Prof. Jihie Kim</a>.</p></div></article>
     </div>
   </section>
   <section id="research" aria-labelledby="research-title">
@@ -64,29 +63,8 @@
     <div id="publications"></div>
     <noscript><p>JavaScript is disabled. Read the publication list on <a href="https://ircv.hanyang.ac.kr/team/jaeha-song">my lab profile</a> and the <a href="https://archiiive99.github.io/PAVER/">PAVER project page</a>.</p></noscript>
   </section>
-  <section id="projects" aria-labelledby="projects-title">
-    <div class="section-heading"><h2 id="projects-title">Projects</h2></div>
-    <article class="industry-project">
-      <div class="project-meta"><span>RideFlux</span><span class="period">Aug 2026 – Present</span></div>
-      <h3>Knowledge distillation for end-to-end autonomous driving</h3>
-      <p>Developing pretraining methods for knowledge-distillation-based end-to-end driving.</p>
-    </article>
-    <article class="industry-project"><div class="project-meta"><span>Hanyang University</span><span class="period">Aug – Sep 2025</span></div><h3>NAVSIM v2 End-to-End Driving Challenge</h3><p>Led development of pseudo-LiDAR data pipelines, BEV planning and reward-model experiments.</p></article>
-    <article class="industry-project"><div class="project-meta"><span>Hyundai Motor · Hanyang University</span><span class="period">Jul 2025 – Jul 2026</span></div><h3>Feature-based learning for surrounding-agent trajectory prediction</h3><p>Developed VAD-based multi-agent prediction and built an OpenScene data pipeline for longer driving sequences.</p></article>
-    <article class="industry-project"><div class="project-meta"><span>SL · Hanyang University</span><span class="period">Apr – Dec 2025</span></div><h3>LiDAR-based forklift hazard detection</h3><p>Built a TensorRT/C++ pipeline for LiDAR-based 3D detection, tracking and collision-risk assessment.</p></article>
-    <article class="industry-project"><div class="project-meta"><span>RideFlux · Hanyang University</span><span class="period">Apr – May 2025</span></div><h3>Waymo Open Dataset Challenge</h3><p>Contributed to vision-based end-to-end driving, evaluation and pseudo labeling for the 3rd-place team.</p></article>
-    <article class="industry-project"><div class="project-meta"><span>SWM · Hanyang University · Inha University</span><span class="period">Apr – Dec 2024</span></div><h3>Forward-collision prevention on domestic AI accelerators</h3><p>Worked on pseudo labeling and model quantization for on-device forward-collision prevention.</p></article>
-    <article class="industry-project"><div class="project-meta"><span>Dongguk University</span><span class="period">Jan 2023 – Feb 2024</span></div><h3>Multi-organ segmentation</h3><p>Developed distance-aware label smoothing and training pipelines for diffusion-based multi-organ CT segmentation.</p></article>
-    <article class="industry-project"><div class="project-meta"><span>Dongguk University</span><span class="period">Jan – Oct 2023</span></div><h3>SteadyLab</h3><p>Led GPS-free driving development using visual localization, stereo-depth obstacle avoidance and real-time detection.</p></article>
-    <article class="industry-project"><div class="project-meta"><span>Dongguk University</span><span class="period">Jan – Oct 2022</span></div><h3>MACARON 4.0</h3><p>Implemented camera/LiDAR parking and delivery missions, lane detection and vehicle communication.</p></article>
-  </section>
-  <section id="background" class="background-grid" aria-label="Education and awards">
-    <div><h2>Education</h2>
-      <article class="industry-project"><div class="project-meta"><span>Doctoral program</span><span class="period">Sep 2026 – Present</span></div><h3>Ph.D. Student</h3><p>Advisor: Soonmin Hwang</p></article>
-      <article class="industry-project"><div class="project-meta"><span>Hanyang University</span><span class="period">Sep 2024 – Aug 2026</span></div><h3>M.S. in Automotive Engineering</h3><p>Advisor: Soonmin Hwang</p></article>
-      <article class="industry-project"><div class="project-meta"><span>Dongguk University</span><span class="period">Mar 2020 – Aug 2024</span></div><h3>B.S. in Computer Engineering</h3></article>
-    </div>
-    <div><h2>Awards</h2>
+  <section id="awards" aria-labelledby="awards-title">
+    <div class="section-heading"><h2 id="awards-title">Awards</h2></div>
       <article class="award-row">
         <div class="award-copy">
           <p class="award-venue">Waymo Open Dataset Challenge</p>
@@ -131,7 +109,28 @@
           <button class="award-thumbnail" type="button" data-figure="assets/award-ev.png" data-title="2022 EV autonomous driving award ceremony" aria-label="Enlarge 2022 EV autonomous driving award ceremony"><img src="assets/award-ev.png" alt="2022 EV autonomous driving award ceremony" loading="lazy" width="160" height="120"></button>
         </div>
       </article>
-    </div>
+  </section>
+  <section id="education" aria-labelledby="education-title">
+    <div class="section-heading"><h2 id="education-title">Education</h2></div>
+      <article class="industry-project"><div class="project-meta"><span>Doctoral program</span><span class="period">Sep 2026 – Present</span></div><h3>Ph.D. Student</h3><p>Advisor: Soonmin Hwang</p></article>
+      <article class="industry-project"><div class="project-meta"><span>Hanyang University</span><span class="period">Sep 2024 – Aug 2026</span></div><h3>M.S. in Automotive Engineering</h3><p>Advisor: Soonmin Hwang</p></article>
+      <article class="industry-project"><div class="project-meta"><span>Dongguk University</span><span class="period">Mar 2020 – Aug 2024</span></div><h3>B.S. in Computer Engineering</h3></article>
+  </section>
+  <section id="projects" aria-labelledby="projects-title">
+    <div class="section-heading"><h2 id="projects-title">Projects</h2></div>
+    <article class="industry-project">
+      <div class="project-meta"><span>RideFlux</span><span class="period">Aug 2026 – Present</span></div>
+      <h3>Knowledge distillation for end-to-end autonomous driving</h3>
+      <p>Developing pretraining methods for knowledge-distillation-based end-to-end driving.</p>
+    </article>
+    <article class="industry-project"><div class="project-meta"><span>Hanyang University</span><span class="period">Aug – Sep 2025</span></div><h3>NAVSIM v2 End-to-End Driving Challenge</h3><p>Led development of pseudo-LiDAR data pipelines, BEV planning and reward-model experiments.</p></article>
+    <article class="industry-project"><div class="project-meta"><span>Hyundai Motor · Hanyang University</span><span class="period">Jul 2025 – Jul 2026</span></div><h3>Feature-based learning for surrounding-agent trajectory prediction</h3><p>Developed VAD-based multi-agent prediction and built an OpenScene data pipeline for longer driving sequences.</p></article>
+    <article class="industry-project"><div class="project-meta"><span>SL · Hanyang University</span><span class="period">Apr – Dec 2025</span></div><h3>LiDAR-based forklift hazard detection</h3><p>Built a TensorRT/C++ pipeline for LiDAR-based 3D detection, tracking and collision-risk assessment.</p></article>
+    <article class="industry-project"><div class="project-meta"><span>RideFlux · Hanyang University</span><span class="period">Apr – May 2025</span></div><h3>Waymo Open Dataset Challenge</h3><p>Contributed to vision-based end-to-end driving, evaluation and pseudo labeling for the 3rd-place team.</p></article>
+    <article class="industry-project"><div class="project-meta"><span>SWM · Hanyang University · Inha University</span><span class="period">Apr – Dec 2024</span></div><h3>Forward-collision prevention on domestic AI accelerators</h3><p>Worked on pseudo labeling and model quantization for on-device forward-collision prevention.</p></article>
+    <article class="industry-project"><div class="project-meta"><span>Dongguk University</span><span class="period">Jan 2023 – Feb 2024</span></div><h3>Multi-organ segmentation</h3><p>Developed distance-aware label smoothing and training pipelines for diffusion-based multi-organ CT segmentation.</p></article>
+    <article class="industry-project"><div class="project-meta"><span>Dongguk University</span><span class="period">Jan – Oct 2023</span></div><h3>SteadyLab</h3><p>Led GPS-free driving development using visual localization, stereo-depth obstacle avoidance and real-time detection.</p></article>
+    <article class="industry-project"><div class="project-meta"><span>Dongguk University</span><span class="period">Jan – Oct 2022</span></div><h3>MACARON 4.0</h3><p>Implemented camera/LiDAR parking and delivery missions, lane detection and vehicle communication.</p></article>
   </section>
   <section id="certifications" aria-labelledby="certifications-title">
     <div class="section-heading"><h2 id="certifications-title">Languages</h2></div>
