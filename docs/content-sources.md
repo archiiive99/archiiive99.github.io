@@ -81,7 +81,7 @@ Public Notion detail pages verified for one-sentence contribution descriptions:
 
 ## Final Review Updates
 
-- Latest portrait replacement: owner reuploaded `inbox/jaeha_song_profile.png` at 17:42 KST on 2026-09-21 (87,325,934 bytes, 3200x4800, 16-bit sRGB). The original stays in the ignored inbox. The site and social/structured-data image references now use `assets/jaeha-song-profile-v3.webp`: full 3200x4800, converted to 8-bit and then losslessly WebP-encoded. No crop or resize; this is not claimed to be bit-identical to the 16-bit original. A new asset URL prevents browsers from reusing the previous portrait cache. Older assets remain preserved.
+- Latest portrait replacement: owner reuploaded `inbox/jaeha_song_profile.png` at 17:56 KST on 2026-09-21 (87,324,651 bytes, 3200x4800, 16-bit sRGB). The original stays in the ignored inbox. The site and social/structured-data image references now use `assets/jaeha-song-profile-v4.webp`: full 3200x4800, converted to 8-bit and then losslessly WebP-encoded. No crop or resize; this is not claimed to be bit-identical to the 16-bit original. A new asset URL prevents browsers from reusing the previous portrait cache. Older assets remain preserved.
 
 - Current order: News, Experience, Publications, Awards, Education, Projects, Languages. Each section has its own matching navigation anchor. The duplicate header name is removed; the main name and back-to-top control remain. Narrow navigation scrolls horizontally and follows the active section.
 - Portrait remains enlarged and rounded; horizontal spacing restored to the prior 32/20/14/10px breakpoint values at the owner's request.
