@@ -81,6 +81,8 @@ Public Notion detail pages verified for one-sentence contribution descriptions:
 
 ## Final Review Updates
 
+- Owner-supplied portrait added on 2026-09-21 from `inbox/jaeha_song_profile.png`; published as `assets/jaeha-song-profile.png`, byte-identical to the original 3200x4800 PNG. The portrait now follows its intrinsic 2:3 ratio rather than the previous 3:4 placeholder. No crop, retouching, forced-height stretch or corner clipping; responsive sizing derives the ratio from the image. The upload inbox remains local and is ignored by Git.
+
 - Awards use an independent row template: venue, distinction and a short factual description form one text group with 8px spacing. Year and image occupy a separate aligned column; mobile descriptions span the row for readability. All four descriptions preserve existing award/project facts without adding competition rankings or unsupported scope.
 
 - Introduction: current Ph.D. student, prior RideFlux internship, and undergraduate medical imaging research; kept as one paragraph. RideFlux links to its official English website, https://rideflux.com/eng/.

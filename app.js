@@ -136,11 +136,15 @@ const intro=document.querySelector('.intro');
 const identity=intro.querySelector('.identity');
 const story=intro.querySelector('.intro-story');
 const portrait=intro.querySelector('.portrait-slot');
+const portraitImage=portrait.querySelector('img');
 const sizePortrait=()=>{
+  const ratio=(portraitImage.naturalWidth || portraitImage.width)/(portraitImage.naturalHeight || portraitImage.height);
   const textHeight=identity.getBoundingClientRect().height+
     (innerWidth>800?story.getBoundingClientRect().height+parseFloat(getComputedStyle(intro).rowGap):0);
-  portrait.style.setProperty('--portrait-width',`${textHeight*.75}px`);
+  portrait.style.setProperty('--portrait-aspect',`${ratio}`);
+  portrait.style.setProperty('--portrait-width',`${textHeight*ratio}px`);
 };
+portraitImage.addEventListener('load',sizePortrait);
 const portraitObserver=new ResizeObserver(sizePortrait);
 portraitObserver.observe(identity);
 portraitObserver.observe(story);
