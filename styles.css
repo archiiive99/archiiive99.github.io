@@ -62,8 +62,9 @@ nav a[aria-current]::after { transform: scaleX(1); }
 main { max-width: 1224px; padding: 0 40px 72px; margin: auto; }
 /* Full-width reading bands, not floating cards. Shadows extend only the fill. */
 main > section { position: relative; isolation: isolate; }
-.intro { display: grid; grid-template-columns: minmax(0,.86fr) minmax(0,1.54fr); grid-template-rows: min-content 1fr; gap: 24px 64px; align-items: start; padding: 64px 0 56px; }
-.portrait-slot { grid-column: 1; grid-row: 1 / span 2; align-self: start; min-height: 0; width: min(100%,var(--portrait-width,240px)); aspect-ratio: var(--portrait-aspect, 2 / 3); }
+.intro { display: grid; grid-template-columns: minmax(0,.86fr) minmax(0,1.54fr); gap: 24px 64px; align-items: center; padding: 64px 0 56px; }
+.portrait-slot { grid-column: 1; grid-row: 1; align-self: center; min-height: 0; width: min(100%,var(--portrait-width,240px)); aspect-ratio: var(--portrait-aspect, 2 / 3); }
+.intro-content { grid-column: 2; grid-row: 1; display: flex; flex-direction: column; gap: 24px; min-width: 0; }
 .portrait-slot img { display: block; width: 100%; height: auto; border-radius: 8px; }
 .identity { grid-column: 2; }
 .intro-story { grid-column: 2; max-width: 100%; }
@@ -205,8 +206,9 @@ footer { max-width: 1040px; margin: auto; padding: 0 0 40px; display: flex; just
 }
 @media (max-width: 800px) {
   main { padding: 0 24px 48px; }
-  .intro { grid-template-columns: 220px minmax(0,1fr); gap: 28px 56px; padding: 38px 0 32px; }
+  .intro { grid-template-columns: 220px minmax(0,1fr); gap: 28px 40.32px; padding: 38px 0 32px; }
   .portrait-slot { grid-row: 1; width: 100%; align-self: center; }
+  .intro-content { display: contents; }
   .identity { align-self: center; }
   h1 { font-size: 40px; }
   h1 span { display: inline-block; margin: 0 0 0 10px; }
@@ -224,7 +226,7 @@ footer { max-width: 1040px; margin: auto; padding: 0 0 40px; display: flex; just
   footer { margin: 0 24px; }
 }
 @media (max-width: 540px) {
-  .intro { grid-template-columns: 154px minmax(0,1fr); gap: 24px 40px; }
+  .intro { grid-template-columns: 154px minmax(0,1fr); gap: 24px 28.8px; }
   .intro h1 { font-size: 26px; }
   .intro h1 span { display: block; margin: 5px 0 0; font-size: 16px; }
   .intro .eyebrow { font-size: 13px; }
@@ -250,7 +252,7 @@ footer { max-width: 1040px; margin: auto; padding: 0 0 40px; display: flex; just
   #certifications { margin-top: 36px; padding-top: 36px; }
 }
 @media (max-width: 380px) {
-  .intro { grid-template-columns: 139px minmax(0,1fr); column-gap: 24px; }
+  .intro { grid-template-columns: 139px minmax(0,1fr); column-gap: 17.28px; }
   .intro h1 { font-size: 24px; }
   .intro .affiliation { font-size: 13px; }
   .intro .contact-links { gap: 4px; }
