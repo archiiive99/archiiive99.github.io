@@ -59,7 +59,7 @@
   <link rel="stylesheet" href="glass.css?v=10">
   <script>try{document.documentElement.dataset.theme=localStorage.getItem('jaeha.theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{}</script>
   <script src="assets/lucide.min.js" defer></script>
-  <script src="app.js?v=27" defer></script>
+  <script src="app.js?v=28" defer></script>
   <script src="optics.js?v=10" defer></script>
   <script src="background.js?v=16" defer></script>
 </head>
@@ -187,6 +187,13 @@
     </div>
   </section>
 </main>
-<footer><a class="button back-to-top" href="#about" aria-label="Back to top" title="Back to top"><i data-lucide="arrow-up" aria-hidden="true"></i></a></footer>
+<footer>
+  <div class="visitor-stats" aria-label="Site visits">
+    <span class="visitor-stat" title="Visits in the last 24 hours"><span class="visitor-label">Today</span><strong id="visitors-today">—</strong></span>
+    <span class="visitor-divider" aria-hidden="true"></span>
+    <span class="visitor-stat"><span class="visitor-label">Total</span><strong id="visitors-total">—</strong></span>
+  </div>
+  <a class="button back-to-top" href="#about" aria-label="Back to top" title="Back to top"><i data-lucide="arrow-up" aria-hidden="true"></i></a>
+</footer>
 </body>
 </html>
