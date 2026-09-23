@@ -141,14 +141,21 @@ sizePortrait();
 
 // CounterAPI provides a cookie-free, anonymous count for this static Pages site.
 const counterBase='https://counterapi.com/api/archiiive99.github.io/view/profile-pageviews';
+const minutesSinceKstMidnight=()=>{
+  const kstNow=new Date(Date.now()+9*60*60*1000);
+  const elapsedSeconds=kstNow.getUTCHours()*3600+
+    kstNow.getUTCMinutes()*60+kstNow.getUTCSeconds();
+  return Math.max(1,Math.ceil(elapsedSeconds/60));
+};
 const loadVisitorStats=async()=>{
   const today=document.querySelector('#visitors-today');
   const total=document.querySelector('#visitors-total');
   try{
     await fetch(counterBase,{mode:'cors',keepalive:true});
+    const todayTimeline=`${minutesSinceKstMidnight()}m`;
     const [totalResponse,todayResponse]=await Promise.all([
       fetch(`${counterBase}?readOnly=true`,{mode:'cors'}),
-      fetch(`${counterBase}?timeline=24h&readOnly=true`,{mode:'cors'})
+      fetch(`${counterBase}?timeline=${todayTimeline}&readOnly=true`,{mode:'cors'})
     ]);
     if(!totalResponse.ok||!todayResponse.ok)throw new Error('counter request failed');
     const [totalData,todayData]=await Promise.all([totalResponse.json(),todayResponse.json()]);
