@@ -1,0 +1,10 @@
+{
+  "site": "https://archiiive99.github.io/",
+  "timezone": "Asia/Seoul",
+  "migratedAt": "2026-10-20T06:02:09Z",
+  "legacy": {
+    "endpoint": "https://counterapi.com/api/archiiive99.github.io/view/profile-pageviews?readOnly=true",
+    "total": null,
+    "recoveredAt": null
+  }
+}

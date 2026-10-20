@@ -3,72 +3,95 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const vm=require('node:vm');
 const path=require('node:path');
+const {recover}=require('../scripts/recover-visitor-count.cjs');
 const root=path.join(__dirname,'..');
-const source=fs.readFileSync(path.join(root,'app.js'),'utf8').split('// CounterAPI provides')[1].replace(/loadVisitorStats\(\);\s*$/,'');
+const source=fs.readFileSync(path.join(root,'visitor-counter.js'),'utf8').replace(/loadVisitorStats\(\);\s*$/,'');
+const config=JSON.parse(fs.readFileSync(path.join(root,'visitor-counter.json'),'utf8'));
 const date=new Date(Date.now()+9*3600000).toISOString().slice(0,10);
-async function run({cache,fetcher=async()=>{throw new Error('offline')},storageBlocked=false}={}){
+const ok=data=>({ok:true,json:async()=>data});
+async function run({cache,oldCache,legacyTotal=null,fetcher=async()=>{throw new Error('offline')},storageBlocked=false}={}){
   const calls=[];
-  const today={textContent:'—',parentElement:{}};
-  const total={textContent:'—',parentElement:{}};
-  const divider={};
-  const stats={hidden:true,querySelector:()=>divider};
-  let saved=cache;
-  const context={AbortController,Date,Number,Promise,JSON,
+  const today={textContent:'Loading…',parentElement:{}};
+  const total={textContent:'Loading…',parentElement:{}};
+  const stats={hidden:false};
+  const saved={'jaeha.visitor-stats.hitscounter.v1':cache,'jaeha.visitor-stats':oldCache};
+  const context={AbortController,Date,Number,Promise,JSON,encodeURIComponent,
     setTimeout:callback=>setTimeout(callback,5),clearTimeout,
     document:{querySelector:selector=>({'.visitor-stats':stats,'#visitors-today':today,'#visitors-total':total}[selector])},
-    localStorage:{getItem:()=>{if(storageBlocked)throw new Error('blocked');return JSON.stringify(saved)},setItem:(_key,value)=>{if(storageBlocked)throw new Error('blocked');saved=JSON.parse(value)}},
-    fetch:async(url,options)=>{calls.push(url);return fetcher(url,options,calls.length)}
+    localStorage:{getItem:key=>{if(storageBlocked)throw new Error('blocked');return JSON.stringify(saved[key])},setItem:(key,value)=>{if(storageBlocked)throw new Error('blocked');saved[key]=JSON.parse(value)}},
+    fetch:async(url,options)=>{calls.push(url);if(url==='visitor-counter.json')return ok({...config,legacy:{...config.legacy,total:legacyTotal}});return fetcher(url,options,calls.length)}
   };
   vm.createContext(context);
-  await vm.runInContext('//'+source+';loadVisitorStats()',context);
-  return {stats,today,total,divider,calls,saved};
+  await vm.runInContext(source+';loadVisitorStats()',context);
+  return {stats,today,total,calls,saved:saved['jaeha.visitor-stats.hitscounter.v1']};
 }
-const ok=value=>({ok:true,json:async()=>({value})});
-test('outage hides placeholders and never retries an increment',async()=>{
+test('provider outage leaves the footer visible and never retries an increment',async()=>{
   const result=await run();
-  assert.equal(result.stats.hidden,true);
-  assert.equal(result.calls.filter(url=>!url.includes('?')).length,1);
-  assert.equal(result.calls.length,5);
-  const css=fs.readFileSync(path.join(root,'styles.css'),'utf8');
-  assert.match(css,/\.visitor-stats\[hidden\], \.visitor-stats \[hidden\] \{ display: none !important; \}/);
-  assert.match(fs.readFileSync(path.join(root,'index.html'),'utf8'),/class="visitor-stats"[^>]* hidden/);
-});
-test('same-day cached counts survive an outage',async()=>{
-  const result=await run({cache:{today:4,total:1234,date,updatedAt:Date.now()}});
   assert.equal(result.stats.hidden,false);
-  assert.equal(result.today.textContent,'4');
-  assert.equal(result.total.textContent,(1234).toLocaleString());
+  assert.equal(result.total.textContent,'Unavailable');
+  assert.equal(result.calls.filter(url=>url.includes('/api/hit?')).length,1);
+  assert.equal(result.calls.filter(url=>url.includes('/api/history?')).length,1);
 });
-test('yesterday count is hidden while cached total remains visible',async()=>{
-  const result=await run({cache:{today:4,total:1234,date:'2000-01-01'}});
-  assert.equal(result.stats.hidden,false);
-  assert.equal(result.today.parentElement.hidden,true);
-  assert.equal(result.divider.hidden,true);
-  assert.equal(result.total.parentElement.hidden,false);
+test('new provider immediately shows KST today and total',async()=>{
+  const result=await run({fetcher:async url=>url.includes('counterapi.com')?Promise.reject(new Error('legacy offline')):ok({today_hits:3,total_hits:12})});
+  assert.equal(result.today.textContent,'3');
+  assert.equal(result.total.textContent,'12');
+  assert.match(result.calls.find(url=>url.includes('/api/hit?')),/tz=Asia%2FSeoul/);
+  assert.match(result.total.parentElement.title,/pending recovery/);
 });
-test('a hanging increment times out and does not block successful reads',async()=>{
-  const result=await run({fetcher:async(url,{signal})=>{
-    if(!url.includes('?'))return new Promise((_,reject)=>signal.addEventListener('abort',()=>reject(new Error('aborted'))));
-    return ok(url.includes('timeline=')?0:321);
-  }});
+test('a previously cached legacy total is preserved and added to raw new counts',async()=>{
+  const result=await run({oldCache:{total:1000},fetcher:async url=>url.includes('counterapi.com')?Promise.reject(new Error('offline')):ok({today_hits:2,total_hits:10})});
+  assert.equal(result.total.textContent,(1010).toLocaleString());
+  assert.equal(result.saved.total,10);
+  assert.equal(result.saved.legacyTotal,1000);
+});
+test('automatic recovery replaces the baseline and never double-adds it on reload',async()=>{
+  const fetcher=async url=>url.includes('counterapi.com')?ok({value:1200}):ok({today_hits:2,total_hits:10});
+  const first=await run({cache:{total:9,legacyTotal:1000,date,today:1},fetcher});
+  const second=await run({cache:first.saved,fetcher});
+  assert.equal(first.total.textContent,(1210).toLocaleString());
+  assert.equal(second.total.textContent,(1210).toLocaleString());
+  assert.equal(second.saved.total,10);
+  assert.ok(second.calls.filter(url=>url.includes('counterapi.com')).every(url=>url.endsWith('?readOnly=true')));
+});
+test('persisted legacy baseline avoids all calls to the retired service',async()=>{
+  const result=await run({legacyTotal:1500,fetcher:async()=>ok({today_hits:0,total_hits:20})});
+  assert.equal(result.total.textContent,(1520).toLocaleString());
   assert.equal(result.today.textContent,'0');
-  assert.equal(result.total.textContent,'321');
-  assert.equal(result.saved.total,321);
-  assert.equal(result.saved.date,date);
+  assert.equal(result.calls.some(url=>url.includes('counterapi.com')),false);
 });
-test('a failed daily query does not hide a successful total',async()=>{
-  const result=await run({fetcher:async url=>{if(url.includes('timeline='))throw new Error('daily unavailable');return ok(42)}});
+test('hanging increment falls back to read-only KST history without duplicating the write',async()=>{
+  const result=await run({legacyTotal:0,fetcher:async(url,{signal})=>{
+    if(url.includes('/api/hit?'))return new Promise((_,reject)=>signal.addEventListener('abort',()=>reject(new Error('aborted'))));
+    return ok({total_hits:21,today_hits:999,history:[{hit_date:'2000-01-01',hit_count:999},{hit_date:date,hit_count:4}]});
+  }});
+  assert.equal(result.today.textContent,'4');
+  assert.equal(result.total.textContent,'21');
+  assert.equal(result.calls.filter(url=>url.includes('/api/hit?')).length,1);
+});
+test('cached raw counts survive downtime, with yesterday hidden from Today',async()=>{
+  const result=await run({cache:{today:4,total:1234,legacyTotal:100,date:'2000-01-01'}});
   assert.equal(result.stats.hidden,false);
-  assert.equal(result.total.textContent,'42');
-  assert.equal(result.today.parentElement.hidden,true);
+  assert.equal(result.today.textContent,'Unavailable');
+  assert.equal(result.total.textContent,(1334).toLocaleString());
 });
-test('invalid responses never turn into a fake zero',async()=>{
-  const result=await run({fetcher:async()=>ok(null)});
-  assert.equal(result.stats.hidden,true);
-  assert.equal(result.total.textContent,'—');
-});
-test('blocked browser storage still permits live counts',async()=>{
-  const result=await run({storageBlocked:true,fetcher:async()=>ok(7)});
-  assert.equal(result.stats.hidden,false);
+test('blocked storage still permits live counts and rejects invalid legacy values',async()=>{
+  const result=await run({storageBlocked:true,fetcher:async url=>url.includes('counterapi.com')?ok({value:null}):ok({today_hits:7,total_hits:17})});
   assert.equal(result.today.textContent,'7');
+  assert.equal(result.total.textContent,'17');
+});
+test('recovery helper imports an absolute baseline once and only uses read-only API',async()=>{
+  const calls=[];
+  const updated=await recover(config,async url=>{calls.push(url);return ok({value:2345})});
+  assert.equal(updated.legacy.total,2345);
+  assert.ok(updated.legacy.recoveredAt);
+  assert.ok(calls[0].endsWith('?readOnly=true'));
+  const unchanged=await recover(updated,async()=>{throw new Error('must not request twice')});
+  assert.equal(unchanged,updated);
+});
+test('recovery helper refuses errors and invalid values without changing configuration',async()=>{
+  const original=JSON.stringify(config);
+  await assert.rejects(recover(config,async()=>({ok:false,status:502})),/502/);
+  await assert.rejects(recover(config,async()=>ok({value:null})),/invalid/);
+  assert.equal(JSON.stringify(config),original);
 });
