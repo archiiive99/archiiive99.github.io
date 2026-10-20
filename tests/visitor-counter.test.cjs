@@ -11,8 +11,8 @@ const date=new Date(Date.now()+9*3600000).toISOString().slice(0,10);
 const ok=data=>({ok:true,json:async()=>data});
 async function run({cache,oldCache,legacyTotal=null,fetcher=async()=>{throw new Error('offline')},storageBlocked=false}={}){
   const calls=[];
-  const today={textContent:'Loading…',parentElement:{}};
-  const total={textContent:'Loading…',parentElement:{}};
+  const today={textContent:'—',parentElement:{}};
+  const total={textContent:'—',parentElement:{}};
   const stats={hidden:false};
   const saved={'jaeha.visitor-stats.hitscounter.v1':cache,'jaeha.visitor-stats':oldCache};
   const context={AbortController,Date,Number,Promise,JSON,encodeURIComponent,

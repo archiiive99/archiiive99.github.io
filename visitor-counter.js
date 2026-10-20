@@ -16,8 +16,8 @@ const loadVisitorStats=async()=>{
   const save=()=>{try{localStorage.setItem(cacheKey,JSON.stringify(cached))}catch{}};
   const render=()=>{
     stats.hidden=false;
-    today.textContent=cached.date===date&&validCount(cached.today)?cached.today.toLocaleString():'Loading…';
-    total.textContent=validCount(cached.total)?(cached.total+(validCount(cached.legacyTotal)?cached.legacyTotal:0)).toLocaleString():validCount(cached.legacyTotal)?cached.legacyTotal.toLocaleString():'Loading…';
+    today.textContent=cached.date===date&&validCount(cached.today)?cached.today.toLocaleString():'—';
+    total.textContent=validCount(cached.total)?(cached.total+(validCount(cached.legacyTotal)?cached.legacyTotal:0)).toLocaleString():validCount(cached.legacyTotal)?cached.legacyTotal.toLocaleString():'—';
     total.parentElement.title=validCount(cached.legacyTotal)?'Includes recovered visits from the previous counter.':'Visits since October 20, 2026. Earlier visits are pending recovery.';
   };
   render();
@@ -69,7 +69,7 @@ const loadVisitorStats=async()=>{
     // Legacy downtime must never delay the working provider.
     await Promise.all([track(),recoverLegacy()]);
   }catch{}
-  if(today.textContent==='Loading…')today.textContent='Unavailable';
-  if(total.textContent==='Loading…')total.textContent='Unavailable';
+  if(today.textContent==='—')today.textContent='Unavailable';
+  if(total.textContent==='—')total.textContent='Unavailable';
 };
 loadVisitorStats();
