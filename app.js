@@ -148,21 +148,57 @@ const minutesSinceKstMidnight=()=>{
   return Math.max(1,Math.ceil(elapsedSeconds/60));
 };
 const loadVisitorStats=async()=>{
+  const stats=document.querySelector('.visitor-stats');
   const today=document.querySelector('#visitors-today');
   const total=document.querySelector('#visitors-total');
-  try{
-    await fetch(counterBase,{mode:'cors',keepalive:true});
-    const todayTimeline=`${minutesSinceKstMidnight()}m`;
-    const [totalResponse,todayResponse]=await Promise.all([
-      fetch(`${counterBase}?readOnly=true`,{mode:'cors'}),
-      fetch(`${counterBase}?timeline=${todayTimeline}&readOnly=true`,{mode:'cors'})
-    ]);
-    if(!totalResponse.ok||!todayResponse.ok)throw new Error('counter request failed');
-    const [totalData,todayData]=await Promise.all([totalResponse.json(),todayResponse.json()]);
-    total.textContent=Number(totalData.value).toLocaleString();
-    today.textContent=Number(todayData.value).toLocaleString();
-  }catch{
-    document.querySelector('.visitor-stats')?.setAttribute('hidden','');
-  }
+  const divider=stats.querySelector('.visitor-divider');
+  const cacheKey='jaeha.visitor-stats';
+  const date=new Date(Date.now()+9*60*60*1000).toISOString().slice(0,10);
+  const validCount=value=>Number.isSafeInteger(value)&&value>=0;
+  let cached={};
+  try{cached=JSON.parse(localStorage.getItem(cacheKey))||{}}catch{}
+  const render=()=>{
+    const hasToday=cached.date===date&&validCount(cached.today);
+    const hasTotal=validCount(cached.total);
+    today.parentElement.hidden=!hasToday;
+    total.parentElement.hidden=!hasTotal;
+    divider.hidden=!hasToday||!hasTotal;
+    if(hasToday)today.textContent=cached.today.toLocaleString();
+    if(hasTotal)total.textContent=cached.total.toLocaleString();
+    stats.hidden=!hasToday&&!hasTotal;
+    stats.title=cached.updatedAt?`Last updated: ${new Date(cached.updatedAt).toLocaleString()}`:'';
+  };
+  render();
+  const request=async url=>{
+    const controller=new AbortController();
+    const timeout=setTimeout(()=>controller.abort(),5000);
+    try{
+      const response=await fetch(url,{mode:'cors',signal:controller.signal});
+      if(!response.ok)throw new Error('counter request failed');
+      const data=await response.json();
+      if(!validCount(data.value))throw new Error('invalid counter value');
+      return data.value;
+    }finally{clearTimeout(timeout)}
+  };
+  // Never retry increments: a timed-out request may already have been counted.
+  const increment=request(counterBase).catch(()=>null);
+  const read=async(url,field)=>{
+    for(let attempt=0;attempt<2;attempt++){
+      try{
+        const value=await request(url);
+        if(cached.date!==date)delete cached.today;
+        cached={...cached,[field]:value,date,updatedAt:Date.now()};
+        render();
+        try{localStorage.setItem(cacheKey,JSON.stringify(cached))}catch{}
+        return;
+      }catch{}
+    }
+  };
+  await increment;
+  const todayTimeline=`${minutesSinceKstMidnight()}m`;
+  await Promise.all([
+    read(`${counterBase}?readOnly=true`,'total'),
+    read(`${counterBase}?timeline=${todayTimeline}&readOnly=true`,'today')
+  ]);
 };
 loadVisitorStats();
